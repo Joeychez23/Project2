@@ -1,0 +1,125 @@
+.M {
+    /*border: 2px solid red;*/
+    display: flex;
+    height: 60px;
+    background-color: blue;
+}
+
+.M-L {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.M-L-I {
+    margin: 0px 10px;
+    
+    
+}
+
+.M-L-I-A {
+    text-decoration: none;
+    color: white;
+}
+
+
+.defaultClass {
+    border: 2px solid black;
+    margin-top: 5px;
+    padding: 5px;
+    
+}
+
+.defaultRowClass {
+    margin-top: 5px;
+    padding: 5px;
+    margin-right: 20px;
+    
+}
+
+/* home.handlebars*/
+.homeImage {
+    height: 125px;
+    width: 120px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+}
+
+.homeImage:hover {
+    cursor: pointer;
+}
+
+
+.homeLink {
+    height: 125px;
+    width: 120px;
+}
+.postPreview {
+    border: 2px solid black;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+
+/* dashboard.handlebars*/
+
+#displayImage {
+    width: 275px;
+    height: 211px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+}
+
+
+.dashImage {
+    width: 75px;
+    height: 57px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+}
+#postTitle {
+    width: 275px;
+}
+#subUp {
+    display: none;
+}
+
+#postContent {
+    height: 80px;
+}
+
+.buttonBox {
+    display: flex;
+    align-items: center;
+}
+
+
+/* post.handlebars*/
+
+.postImage {
+    width: 440px;
+    height: 330px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+}
+.postData {
+    border: 2px solid black;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+
+.commentBox {
+    border: 2px solid black;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+
+#upCom {
+    display: none;
+}

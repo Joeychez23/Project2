@@ -1,0 +1,60 @@
+<div class="defaultClass">
+    <div>
+        <div class="postImage" style="background-image: url('{{{base64}}}');"></div>
+        <!--<div>
+            <h2>{{title}}</h2>
+        </div>-->
+        <div class="defaultClass">
+            <p>Created by {{user.username}} on {{format_date date_created}}</p>
+            <p>{{description}}</p>
+        </div>
+    </div>
+</div>
+
+{{cheese}}
+
+
+{{#if logged_in }}
+<div class="defaultClass">
+    <form postId={{id}}>
+        <div>
+            <textarea id='comment_description' placeholder="Enter a comment here..." cols="30" rows="2"></textarea>
+        </div>
+        <div>
+            <button id="upCom" class="btn btn-primary" commentId=''>Update</button>
+            <button id="comCre" class="btn btn-success" postId={{id}}>Add Comment</button>
+        </div>
+    </form>
+</div>
+
+<div class="defaultClass">
+    <h2>Comments</h2>
+    {{#each comments as |comment|}}
+    <div class="defaultClass">
+        <p>{{comment.comment_description}}</p>
+        <p>Created by {{comment.user.username}} on {{format_date date_created}}</p>
+        {{#ifCond comment.currUser '==' comment.user_id }}
+        <div>
+            <button class="btn btn-success upPage" commentId="{{comment.id}}">UPDATE</button><button
+                class="btn btn-danger delCom" commentId="{{comment.id}}">DELETE</button>
+        </div>
+        {{/ifCond}}
+    </div>
+    {{/each}}
+</div>
+
+
+
+{{else}}
+<div class="defaultClass">
+    <h2>Comments</h2>
+    {{#each comments as |comment|}}
+    <div class="defaultClass">
+        <p>{{comment.comment_description}}</p>
+        <p>Created by {{comment.user.username}} on {{format_date date_created}}</p>
+    </div>
+    {{/each}}
+</div>
+{{/if}}
+
+<script src="/javascripts/comments.js"></script>

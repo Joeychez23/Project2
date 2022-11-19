@@ -1,0 +1,22 @@
+{{#each posts as |post|}}
+
+<div class="row defaultRowClass">
+
+  <div class="container-fluid postPreview">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="homeLink">
+          <a href="/post/{{post.id}}">
+            <div class="homeImage" style="background-image: url('{{{post.base64}}}');"></div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <p>Created by {{post.user.username}} on {{ format_date post.date_created }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{{/each}}
