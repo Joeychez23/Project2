@@ -3,16 +3,20 @@
     display: flex;
     height: 60px;
     background-color: blue;
+    width: 100%;
 }
 
 .M-L {
     list-style: none;
     display: inline-flex;
     align-items: center;
+    /*border: 1px solid black;*/
+    width: 100%;
 }
 
 .M-L-I {
     margin: 0px 10px;
+    /*border: 1px solid black;*/
     
     
 }
@@ -36,6 +40,45 @@
     margin-right: 20px;
     
 }
+
+#searchBar {
+    margin-top: 10px;
+    display: flex;
+    /*border: 1px solid orange;*/
+    margin-right: 20px;
+    justify-content: end;
+}
+
+
+#searchBox {
+    flex-wrap: wrap;
+    /*display: block;*/
+    /*height: 200px;*/
+    width: 200px;
+    
+}
+
+#search {
+    height: 24px;
+    width: 200px;
+}
+
+.nameBox {
+    /*border: 1px solid purple;*/
+    background-color: blue;  
+    float: right;
+    width: 200px;
+}
+
+.nameLink {
+    color: white
+}
+
+.hide {
+    display: none;
+}
+
+
 
 /* home.handlebars*/
 .homeImage {

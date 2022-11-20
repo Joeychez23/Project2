@@ -38,6 +38,20 @@
             <li id="signupBtn" class="M-L-I"><a class="M-L-I-A" href="/signup">Signup</a></li>
             {{/if}}
         </ul>
+        <div id="searchBar">
+            <div id="searchBox">
+                <input placeholder="Search Users" type="search" id="search">
+                <div class="userCards"></div>
+
+
+                <template class="userTemplate">
+                    <div class="singleCard">
+                        <div class="nameBox"><a class="nameLink"></a></div>
+                    </div>
+                </template>
+
+            </div>
+        </div>
     </nav>
     <div class="container-fluid">{{{body}}}</div>
 </body>

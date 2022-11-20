@@ -52,5 +52,5 @@ setTimeout(async function () {
     await console.log(`\nDatabase initalized`);
     await app.listen(PORT);
     await console.log(`\nNow listening on port ${PORT}\n`);
-}, 10000);
+}, 5000);
 

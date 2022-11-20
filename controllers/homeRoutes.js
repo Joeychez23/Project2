@@ -111,9 +111,6 @@ router.get('/post/:id', async function (req, res) {
 
 		}
 
-
-		console.log(post)
-
 		res.render('post', {
 			...post,
 			logged_in: req.session.logged_in,

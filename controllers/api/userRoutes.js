@@ -85,4 +85,20 @@ router.post('/logout', async function (req, res) {
 
 
 
+router.get('/', async function (req, res) {
+    try {
+        const data = await User.findAll({
+            attributes: {
+				exclude: ['password']
+			}
+        });
+        res.json(data);
+
+    } catch (err) {
+        res.json(err);
+    }
+})
+
+
+
 module.exports = router;
