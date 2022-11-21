@@ -288,11 +288,11 @@ async function onPageLoad() {
             }
         }
 
-        if(data[index + 1] == null) {
-            document.querySelector('#forwardBtn').classList.add('hide')
+        if(data[index + 1] != null) {
+            document.querySelector('#forwardBtn').classList.remove('hide')
         }
-        if(data[index - 1] == null) {
-            document.querySelector('#backBtn').classList.add('hide')
+        if(data[index - 1] != null) {
+            document.querySelector('#backBtn').classList.remove('hide')
         }
 
 
@@ -311,11 +311,11 @@ async function onPageLoad() {
             }
         }
 
-        if(data.posts[index + 1] == null) {
-            document.querySelector('#forwardBtn').classList.add('hide')
+        if(data.posts[index + 1] != null) {
+            document.querySelector('#forwardBtn').classList.remove('hide')
         }
-        if(data.posts[index - 1] == null) {
-            document.querySelector('#backBtn').classList.add('hide')
+        if(data.posts[index - 1] != null) {
+            document.querySelector('#backBtn').classList.remove('hide')
         }
     }
 }
