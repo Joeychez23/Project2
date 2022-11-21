@@ -59,7 +59,7 @@ router.delete('/:id', withAuth, async function(req, res) {
     }
 })
 
-router.get('/getPost/:id', withAuth, async function(req, res) {
+router.get('/getPost/:id',  withAuth, async function(req, res) {
     try {
         console.log(req.params.id);
         const data = await Post.findByPk(req.params.id);
@@ -78,6 +78,23 @@ router.get('/getPost/:id', withAuth, async function(req, res) {
         res.status(500).json(err);
     }
 })
+
+router.get('/getAllPost', async function(req, res) {
+    try {;
+        const data = await Post.findAll();
+
+        if(!data) {
+            res.status(404).json({message: 'Post not found'})
+            return
+        }
+
+        res.json(data)
+    } 
+    catch (err) {
+        res.status(500).json(err);
+    }
+})
+
 
 
 module.exports = router;

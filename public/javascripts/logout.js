@@ -16,7 +16,7 @@ async function logout() {
             document.location.replace(`/`);
         }
     }
-    catch (err) {}
+    catch (err) { }
 }
 
 let time = 0;
@@ -59,7 +59,7 @@ const cardContainer = document.querySelector(".userCards");
 const searchInput = document.querySelector("#search");
 
 let users = new Array;
-searchInput.addEventListener("input", function(event) {
+searchInput.addEventListener("input", function (event) {
     const input = event.target.value.toLowerCase()
     const elements = document.querySelectorAll(".singleCard")
     const nameLink = document.querySelectorAll(".nameLink")
@@ -75,6 +75,22 @@ searchInput.addEventListener("input", function(event) {
     }
 })
 
+document.querySelector('#root').addEventListener('click', function () {
+    const elements = document.querySelectorAll(".singleCard")
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.add('hide')
+    }
+})
+
+
+searchInput.addEventListener('click', function () {
+    const elements = document.querySelectorAll(".singleCard")
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.remove('hide')
+    }
+})
+
+
 
 async function setSearchBar() {
     const options = {
@@ -82,14 +98,13 @@ async function setSearchBar() {
     }
     const response = await fetch('/api/users/', options);
     const data = await response.json();
-    console.log(data);
     for (let i = 0; i < data.length; i++) {
         const card = cardTemplate.content.cloneNode(true);
         const username = card.querySelector(".nameLink")
         //const singleCard = card.querySelector(".singleCard")
         const nameLink = card.querySelector(".nameLink")
         username.innerText = `${data[i].username}`;
-        username.setAttribute('href', `/userDash/${data[i].id}`);
+        username.setAttribute('href', `/portfolio/${data[i].id}`);
         nameLink.value = `${data[i].username.toLowerCase()}`
         cardContainer.append(card);
     }
@@ -101,3 +116,47 @@ async function setSearchBar() {
 }
 
 setSearchBar();
+
+
+//Next Page 
+/*
+if (document.querySelector('#forwardPage') != null) {
+    document.querySelector('#forwardPage').addEventListener('click', async function () {
+
+
+        userID = document.querySelector('#root').getAttribute('fromID')
+        if (userID == 0) {
+            const response = await fetch('/api/posts/getAllPost')
+            const data = await response.json();
+            let splitLocation = window.location.href.split('/post/')
+
+
+            let currPostId = Number(splitLocation[1]);
+            let index;
+            for (let i = 0; i < data.length; i++) {
+                if(data[i].id == currPostId) {
+                    index = i;
+                }
+            }
+
+            if(data[index + 1] != null) {
+                window.location.href = `${splitLocation[0]}/post/${data[index + 1].id}`
+            }
+
+
+
+
+        } else if (userID > 0 && userID != null) {
+                   
+        }
+
+
+
+
+        console.log(data)
+
+        //id += 1
+
+        //window.location.href = `${findId[0]}/post/${id}`
+    })
+}*/

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Post } = require('../../models');
 
 
 
@@ -91,6 +91,24 @@ router.get('/', async function (req, res) {
             attributes: {
 				exclude: ['password']
 			}
+        });
+        res.json(data);
+
+    } catch (err) {
+        res.json(err);
+    }
+})
+
+router.get('/getUser/:id', async function (req, res) {
+    try {
+        const data = await User.findByPk(req.params.id,
+        {
+            attributes: {
+				exclude: ['password']
+			},
+            include: {
+                model: Post
+            }
         });
         res.json(data);
 

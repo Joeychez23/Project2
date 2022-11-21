@@ -1,0 +1,28 @@
+<div class="defaultClass" id="portfolio" fromID="{{id}}">
+    <div>
+        <div class="col-md-12">
+            <h2>{{username}}'s Portfolio</h2>
+        </div>
+    </div>
+
+    <!--If posts.length != NULL -->
+    {{#if posts.length}}
+    <div class="col-md-12">
+        <h3>Current posts:</h3>
+        <div class="userPort">
+            <!--If for each index of posts create post meaning the code below -->
+            {{#each posts as |post|}}
+            <div class="row defaultRowClass">
+                <div class="col-md-12">
+                    <a href="/post/{{post.id}}?portfolio=true">
+                        <div class="portImage" style="background-image: url('{{{post.base64}}}');"></div>
+                    </a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+    <script src="../javascripts/portfolio.js"></script>
+</div>
+

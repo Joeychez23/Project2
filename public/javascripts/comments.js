@@ -156,3 +156,169 @@ if (upPageBtn != null) {
         upPageBtn[i].addEventListener('click', upPage);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+//Next Page 
+
+if (document.querySelector('#forwardBtn') != null) {
+    document.querySelector('#forwardBtn').addEventListener('click', async function () {
+
+
+        portBool = window.location.href.split('portfolio=')
+        portBool = (portBool[1] === 'true')
+        console.log(portBool)
+        let userID = document.querySelector('#postBtnBox').getAttribute("userID");
+        if (portBool == false) {
+            const response = await fetch('/api/posts/getAllPost')
+            const data = await response.json();
+            let splitLocation = window.location.href.split('/post/')
+            let baseURL = splitLocation[0]
+            splitLocation = splitLocation[1].split('?');
+            let currPostId = Number(splitLocation[0]);
+            let index;
+            for (let i = 0; i < data.length; i++) {
+                if(data[i].id == currPostId) {
+                    index = i;
+                }
+            }
+
+            if(data[index + 1] != null) {
+                window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=false`
+            }
+
+
+
+
+        } else if (portBool == true && portBool != null) {
+            const response = await fetch(`/api/users/getUser/${userID}`);
+            const data = await response.json();
+            let splitLocation = window.location.href.split('/post/')
+            let baseURL = splitLocation[0]
+            splitLocation = splitLocation[1].split('?');
+            let currPostId = Number(splitLocation[0]);
+            let index;
+            for (let i = 0; i < data.posts.length; i++) {
+                if(data.posts[i].id == currPostId) {
+                    index = i;
+                }
+            }
+
+            if(data.posts[index + 1] != null) {
+                window.location.href = `${baseURL}/post/${data.posts[index + 1].id}?portfolio=true`
+            }
+        }
+    })
+}
+
+if (document.querySelector('#backBtn') != null) {
+    document.querySelector('#backBtn').addEventListener('click', async function () {
+
+
+        portBool = window.location.href.split('portfolio=')
+        portBool = (portBool[1] === 'true')
+        console.log(portBool)
+        let userID = document.querySelector('#postBtnBox').getAttribute("userID");
+        if (portBool == false) {
+            const response = await fetch('/api/posts/getAllPost')
+            const data = await response.json();
+            let splitLocation = window.location.href.split('/post/')
+            let baseURL = splitLocation[0]
+            splitLocation = splitLocation[1].split('?');
+            let currPostId = Number(splitLocation[0]);
+            let index;
+            for (let i = 0; i < data.length; i++) {
+                if(data[i].id == currPostId) {
+                    index = i;
+                }
+            }
+
+            if(data[index - 1] != null) {
+                window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=false`
+            }
+
+
+
+
+        } else if (portBool == true && portBool != null) {
+            const response = await fetch(`/api/users/getUser/${userID}`);
+            const data = await response.json();
+            let splitLocation = window.location.href.split('/post/')
+            let baseURL = splitLocation[0]
+            splitLocation = splitLocation[1].split('?');
+            let currPostId = Number(splitLocation[0]);
+            let index;
+            for (let i = 0; i < data.posts.length; i++) {
+                if(data.posts[i].id == currPostId) {
+                    index = i;
+                }
+            }
+
+            if(data.posts[index - 1] != null) {
+                window.location.href = `${baseURL}/post/${data.posts[index - 1].id}?portfolio=true`
+            }
+        }
+    })
+}
+
+
+async function onPageLoad() {
+    portBool = window.location.href.split('portfolio=')
+    portBool = (portBool[1] === 'true')
+    console.log(portBool)
+    let userID = document.querySelector('#postBtnBox').getAttribute("userID");
+    if (portBool == false) {
+        const response = await fetch('/api/posts/getAllPost')
+        const data = await response.json();
+        let splitLocation = window.location.href.split('/post/')
+        splitLocation = splitLocation[1].split('?');
+        let currPostId = Number(splitLocation[0]);
+        let index;
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].id == currPostId) {
+                index = i;
+            }
+        }
+
+        if(data[index + 1] == null) {
+            document.querySelector('#forwardBtn').classList.add('hide')
+        }
+        if(data[index - 1] == null) {
+            document.querySelector('#backBtn').classList.add('hide')
+        }
+
+
+
+
+    } else if (portBool == true && portBool != null) {
+        const response = await fetch(`/api/users/getUser/${userID}`);
+        const data = await response.json();
+        let splitLocation = window.location.href.split('/post/')
+        splitLocation = splitLocation[1].split('?');
+        let currPostId = Number(splitLocation[0]);
+        let index;
+        for (let i = 0; i < data.posts.length; i++) {
+            if(data.posts[i].id == currPostId) {
+                index = i;
+            }
+        }
+
+        if(data.posts[index + 1] == null) {
+            document.querySelector('#forwardBtn').classList.add('hide')
+        }
+        if(data.posts[index - 1] == null) {
+            document.querySelector('#backBtn').classList.add('hide')
+        }
+    }
+}
+
+onPageLoad();
+

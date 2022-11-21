@@ -99,9 +99,6 @@ router.get('/post/:id', async function (req, res) {
 
 		});
 
-
-
-
 		const post = data.get({
 			plain: true
 		})
@@ -115,6 +112,33 @@ router.get('/post/:id', async function (req, res) {
 			...post,
 			logged_in: req.session.logged_in,
 		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
+})
+
+
+
+
+router.get('/portfolio/:id', async function (req, res) {
+	try {
+		const data = await User.findByPk(req.params.id, {
+			attributes: {
+				exclude: ['password']
+			},
+			include: [{
+				model: Post
+			}],
+		})
+
+		const post = data.get({
+			plain: true
+		})
+
+		res.render('portfolio', {
+			...post,
+			logged_in: req.session.logged_in
+		})
 	} catch (err) {
 		res.status(500).json(err);
 	}

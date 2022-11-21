@@ -19,7 +19,6 @@ router.get('/getComment/:id', withAuth, async function(req, res) {
         const comment = data.get({
             plain: true
         })
-        console.log(comment)
         res.json(comment)
     } 
     catch (err) {
@@ -39,8 +38,6 @@ router.post('/', withAuth, async function(req, res) {
             post_id: req.body.postId,
             user_id: req.session.user_id
         });
-
-        console.log(data)
         res.status(200).json(data);
     } 
     catch (err) {
@@ -61,7 +58,6 @@ router.post('/:id', withAuth, async function(req, res) {
         })
 
         await data.save();
-        console.log(data);
         res.status(200).json(data);
     } 
     catch (err) {

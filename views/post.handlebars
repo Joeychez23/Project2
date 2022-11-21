@@ -1,9 +1,11 @@
+<div id="postBtnBox" userID="{{user_id}}">
+    <a href='/portfolio/{{user_id}}'>
+        <button id="toPort">View Author Portfolio</button>
+    </a>
+</div>
 <div class="defaultClass">
     <div>
         <div class="postImage" style="background-image: url('{{{base64}}}');"></div>
-        <!--<div>
-            <h2>{{title}}</h2>
-        </div>-->
         <div class="defaultClass">
             <p>Created by {{user.username}} on {{format_date date_created}}</p>
             <p>{{description}}</p>
@@ -11,8 +13,10 @@
     </div>
 </div>
 
-{{cheese}}
-
+<div id="postBtnBox" userID="{{user_id}}">
+    <button id="backBtn">Previous Post</button>
+    <button id="forwardBtn">Next Post</button>
+</div>
 
 {{#if logged_in }}
 <div class="defaultClass">
@@ -57,4 +61,4 @@
 </div>
 {{/if}}
 
-<script src="/javascripts/comments.js"></script>
+<script src="../javascripts/comments.js"></script>
