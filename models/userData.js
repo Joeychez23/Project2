@@ -35,6 +35,7 @@ User.init(
         newData.password = await bcrypt.hash(newData.password, 10);
         return newData;
       },
+      
       beforeUpdate: async function (upData) {
         upData.password = await bcrypt.hash(upData.password, 10);
         return upData;

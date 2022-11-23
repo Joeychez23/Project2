@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User, Post } = require('../../models');
+const { User, Post, FollowData} = require('../../models');
+const withAuth = require('../../utils/auth');
 
 
 
@@ -9,12 +10,17 @@ router.post('/', async function (req, res) {
     try {
         const data = await User.create(req.body);
 
+        const FollowConnect = await FollowData.create({
+            id: data.id,
+        })
+
         req.session.save(function () {
             req.session.user_id = data.id;
             req.session.logged_in = true;
 
             res.json({ user: data, message: 'You are now signed up' });
         })
+
     } catch (err) {
         res.status(400).json(err);
     }
@@ -116,6 +122,35 @@ router.get('/getUser/:id', async function (req, res) {
         res.json(err);
     }
 })
+
+router.get('/getFollowData/:id', async function (req, res) {
+    try {
+        const data = await FollowData.findByPk(req.params.id)
+        res.json(data);
+
+    } catch (err) {
+        res.json(err);
+    }
+})
+
+
+
+
+router.post('/updateUser/:id', withAuth, async function(req, res) {
+    try {
+        const data = await FollowData.findByPk(req.params.id);
+        await data.update({
+            followers: req.body.followers,
+            following: req.body.following,
+        })
+
+        await data.save();
+        res.status(200).json(data);
+    } 
+    catch (err) {
+        res.status(400).json(err);
+    }
+});
 
 
 

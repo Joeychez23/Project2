@@ -69,7 +69,8 @@ router.get('/dashboard', withAuth, async function (req, res) {
 
 		res.render('dashboard', {
 			...user,
-			logged_in: true
+			logged_in: true,
+			currUser: req.session.user_id
 
 		})
 	} catch (err) {
@@ -137,7 +138,8 @@ router.get('/portfolio/:id', async function (req, res) {
 
 		res.render('portfolio', {
 			...post,
-			logged_in: req.session.logged_in
+			logged_in: req.session.logged_in,
+			currUser: req.session.user_id
 		})
 	} catch (err) {
 		res.status(500).json(err);

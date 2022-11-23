@@ -17,15 +17,15 @@ async function onPageLoad() {
         let currPostId = Number(splitLocation[0]);
         let index;
         for (let i = 0; i < data.length; i++) {
-            if(data[i].id == currPostId) {
+            if (data[i].id == currPostId) {
                 index = i;
             }
         }
 
-        if(data[index + 1] != null) {
+        if (data[index + 1] != null) {
             document.querySelector('#forwardBtn').classList.remove('hide')
         }
-        if(data[index - 1] != null) {
+        if (data[index - 1] != null) {
             document.querySelector('#backBtn').classList.remove('hide')
         }
 
@@ -40,15 +40,15 @@ async function onPageLoad() {
         let currPostId = Number(splitLocation[0]);
         let index;
         for (let i = 0; i < data.posts.length; i++) {
-            if(data.posts[i].id == currPostId) {
+            if (data.posts[i].id == currPostId) {
                 index = i;
             }
         }
 
-        if(data.posts[index + 1] != null) {
+        if (data.posts[index + 1] != null) {
             document.querySelector('#forwardBtn').classList.remove('hide')
         }
-        if(data.posts[index - 1] != null) {
+        if (data.posts[index - 1] != null) {
             document.querySelector('#backBtn').classList.remove('hide')
         }
     }
@@ -255,7 +255,7 @@ if (document.querySelector('#forwardBtn') != null) {
 
         portBool = window.location.href.split('portfolio=')
         portBool = (portBool[1] === 'true')
-        console.log(portBool)
+        //console.log(portBool)
         let userID = document.querySelector('#postBtnBox').getAttribute("userID");
         if (portBool == false) {
             const response = await fetch('/api/posts/getAllPost')
@@ -266,12 +266,12 @@ if (document.querySelector('#forwardBtn') != null) {
             let currPostId = Number(splitLocation[0]);
             let index;
             for (let i = 0; i < data.length; i++) {
-                if(data[i].id == currPostId) {
+                if (data[i].id == currPostId) {
                     index = i;
                 }
             }
 
-            if(data[index + 1] != null) {
+            if (data[index + 1] != null) {
                 window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=false`
             }
 
@@ -287,12 +287,12 @@ if (document.querySelector('#forwardBtn') != null) {
             let currPostId = Number(splitLocation[0]);
             let index;
             for (let i = 0; i < data.posts.length; i++) {
-                if(data.posts[i].id == currPostId) {
+                if (data.posts[i].id == currPostId) {
                     index = i;
                 }
             }
 
-            if(data.posts[index + 1] != null) {
+            if (data.posts[index + 1] != null) {
                 window.location.href = `${baseURL}/post/${data.posts[index + 1].id}?portfolio=true`
             }
         }
@@ -318,12 +318,12 @@ if (document.querySelector('#backBtn') != null) {
             let currPostId = Number(splitLocation[0]);
             let index;
             for (let i = 0; i < data.length; i++) {
-                if(data[i].id == currPostId) {
+                if (data[i].id == currPostId) {
                     index = i;
                 }
             }
 
-            if(data[index - 1] != null) {
+            if (data[index - 1] != null) {
                 window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=false`
             }
 
@@ -339,12 +339,12 @@ if (document.querySelector('#backBtn') != null) {
             let currPostId = Number(splitLocation[0]);
             let index;
             for (let i = 0; i < data.posts.length; i++) {
-                if(data.posts[i].id == currPostId) {
+                if (data.posts[i].id == currPostId) {
                     index = i;
                 }
             }
 
-            if(data.posts[index - 1] != null) {
+            if (data.posts[index - 1] != null) {
                 window.location.href = `${baseURL}/post/${data.posts[index - 1].id}?portfolio=true`
             }
         }

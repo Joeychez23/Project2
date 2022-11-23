@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 const sequelize = require('./config/connection');
 const routes = require('./controllers');
 const exphbs = require('express-handlebars');
-//const seed = require('./seeds/seed.js');
+const seed = require('./seeds/seed.js');
 const helpers = require('./utils/helper');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -48,7 +48,7 @@ app.use(routes);
 
 setTimeout(async function () {
     await sequelize.sync({ force: false })
-    //await seed;
+    await seed;
     await console.log(`\nDatabase initalized`);
     await app.listen(PORT);
     await console.log(`\nNow listening on port ${PORT}\n`);

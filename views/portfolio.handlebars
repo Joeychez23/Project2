@@ -5,6 +5,9 @@
         </div>
     </div>
 
+    {{#if logged_in}}
+    <button class="hide" id="followBtn" value="0" logID="{{currUser}}">Follow</button>
+    {{/if}}
     <!--If posts.length != NULL -->
     {{#if posts.length}}
     <div class="col-md-12">
