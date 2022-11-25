@@ -39,8 +39,6 @@ router.get('/home', withAuth, async function (req, res) {
 			plain: true
 		})
 
-		console.log(followData);
-
 		let userFollowers = followData.following.split(',')
 
 

@@ -10,7 +10,6 @@ async function onPageLoad() {
     let portGlobal = (portBool[1] === 'Global');
     let portHome = (portBool[1] === 'Home');
     let userID = document.querySelector('#postBtnBox').getAttribute("userID");
-    console.log(portUser)
     if (portGlobal) {
         const response = await fetch('/api/posts/getAllPost')
         const data = await response.json();
@@ -54,6 +53,31 @@ async function onPageLoad() {
             document.querySelector('#forwardBtn').classList.add('btn-primary')
         }
         if (data.posts[index - 1] != null) {
+            document.querySelector('#backBtn').classList.remove('disabled')
+            document.querySelector('#backBtn').classList.add('btn-primary')
+        }
+    }
+
+    if (portHome) {
+        const response = await fetch(`/api/posts/userHomeData`);
+
+        const data = await response.json()
+
+        let splitLocation = window.location.href.split('/post/')
+        splitLocation = splitLocation[1].split('?');
+        let currPostId = Number(splitLocation[0]);
+        let index;
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].id == currPostId) {
+                index = i;
+            }
+        }
+
+        if (data[index + 1] != null) {
+            document.querySelector('#forwardBtn').classList.remove('disabled')
+            document.querySelector('#forwardBtn').classList.add('btn-primary')
+        }
+        if (data[index - 1] != null) {
             document.querySelector('#backBtn').classList.remove('disabled')
             document.querySelector('#backBtn').classList.add('btn-primary')
         }
@@ -306,6 +330,27 @@ if (document.querySelector('#forwardBtn') != null) {
                 window.location.href = `${baseURL}/post/${data.posts[index + 1].id}?portfolio=User`
             }
         }
+
+        if (portHome) {
+            const response = await fetch(`/api/posts/userHomeData`);
+    
+            const data = await response.json()
+    
+            let splitLocation = window.location.href.split('/post/')
+            let baseURL = splitLocation[0]
+            splitLocation = splitLocation[1].split('?');
+            let currPostId = Number(splitLocation[0]);
+            let index;
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].id == currPostId) {
+                    index = i;
+                }
+            }
+    
+            if (data[index + 1] != null) {
+                window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=Home`
+            }
+        }
     })
 }
 
@@ -359,6 +404,27 @@ if (document.querySelector('#backBtn') != null) {
 
             if (data.posts[index - 1] != null) {
                 window.location.href = `${baseURL}/post/${data.posts[index - 1].id}?portfolio=User`
+            }
+        }
+
+        if (portHome) {
+            const response = await fetch(`/api/posts/userHomeData`);
+    
+            const data = await response.json()
+    
+            let splitLocation = window.location.href.split('/post/')
+            let baseURL = splitLocation[0]
+            splitLocation = splitLocation[1].split('?');
+            let currPostId = Number(splitLocation[0]);
+            let index;
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].id == currPostId) {
+                    index = i;
+                }
+            }
+    
+            if (data[index - 1] != null) {
+                window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=Home`
             }
         }
     })

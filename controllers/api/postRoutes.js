@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, User, FollowData } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -61,7 +61,6 @@ router.delete('/:id', withAuth, async function(req, res) {
 
 router.get('/getPost/:id',  withAuth, async function(req, res) {
     try {
-        console.log(req.params.id);
         const data = await Post.findByPk(req.params.id);
 
         if(!data) {
@@ -93,6 +92,77 @@ router.get('/getAllPost', async function(req, res) {
     catch (err) {
         res.status(500).json(err);
     }
+})
+
+
+router.get('/userHomeData', async function(req, res) {
+    try {
+		const response = await FollowData.findByPk(req.session.user_id);
+		const followData = response.get({
+			plain: true
+		})
+
+		let userFollowers = followData.following.split(',')
+
+
+
+		if (userFollowers == '') {
+			userFollowers = null;
+		}
+
+
+		let postIDs = new Array
+
+
+		if (userFollowers != null) {
+			for (let i = 0; i < userFollowers.length; i++) {
+				const response = await User.findByPk(Number(userFollowers[i]), {
+					attributes: {
+						exclude: ['password']
+					},
+					include: [{
+						model: Post
+					}],
+				})
+
+
+				const data = await response.get({
+					plain: true
+				})
+
+
+				for (let i = 0; i < data.posts.length; i++) {
+					postIDs[postIDs.length] = data.posts[i].id
+				}
+
+
+			}
+
+
+			let posts = new Array;
+
+			for (let i = 0; i < postIDs.length; i++) {
+				const data = await Post.findByPk(postIDs[i])
+
+
+				for (let i = 0; i < 1; i++) {
+					let addPostData = await data.get({
+						plain: true
+					})
+
+					posts[posts.length] = addPostData
+				}
+			}
+
+            res.json(posts)
+		} else {
+			let posts = new Array;
+            res.json(posts);
+		}
+
+	} catch (err) {
+		res.status(500).json(err)
+	}
 })
 
 

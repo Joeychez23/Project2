@@ -1,4 +1,4 @@
-<div class="defaultClass">
+<div id="dashBox" class="defaultClass">
     <div>
         <div class="col-md-12">
             <h2>{{username}} Dashboard</h2>
@@ -36,7 +36,7 @@
             {{#each posts as |post|}}
             <div class="row defaultRowClass">
                 <div class="col-md-8">
-                    <a href="/post/{{post.id}}?portfolio=User">
+                    <a href="/post/{{post.id}}?portfolio=user">
                         <div class="dashImage" style="background-image: url('{{{post.base64}}}');"></div>
                     </a>
                     <!--<h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>-->
