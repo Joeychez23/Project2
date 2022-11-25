@@ -6,9 +6,9 @@ onPageLoad();
 
 async function onPageLoad() {
     portBool = window.location.href.split('portfolio=')
-    let portUser = (portBool[1] === 'User');
-    let portGlobal = (portBool[1] === 'Global');
-    let portHome = (portBool[1] === 'Home');
+    let portUser = (portBool[1] === 'user');
+    let portGlobal = (portBool[1] === 'global');
+    let portHome = (portBool[1] === 'home');
     let userID = document.querySelector('#postBtnBox').getAttribute("userID");
     if (portGlobal) {
         const response = await fetch('/api/posts/getAllPost')
@@ -284,10 +284,9 @@ if (document.querySelector('#forwardBtn') != null) {
 
 
         portBool = window.location.href.split('portfolio=')
-        let portUser = (portBool[1] === 'User');
-        let portGlobal = (portBool[1] === 'Global');
-        let portHome = (portBool[1] === 'Home');
-        //console.log(portBool)
+        let portUser = (portBool[1] === 'user');
+        let portGlobal = (portBool[1] === 'global');
+        let portHome = (portBool[1] === 'home');
         let userID = document.querySelector('#postBtnBox').getAttribute("userID");
         if (portGlobal) {
             const response = await fetch('/api/posts/getAllPost')
@@ -304,7 +303,7 @@ if (document.querySelector('#forwardBtn') != null) {
             }
 
             if (data[index + 1] != null) {
-                window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=Global`
+                window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=global`
             }
 
 
@@ -327,7 +326,7 @@ if (document.querySelector('#forwardBtn') != null) {
             }
 
             if (data.posts[index + 1] != null) {
-                window.location.href = `${baseURL}/post/${data.posts[index + 1].id}?portfolio=User`
+                window.location.href = `${baseURL}/post/${data.posts[index + 1].id}?portfolio=user`
             }
         }
 
@@ -348,7 +347,7 @@ if (document.querySelector('#forwardBtn') != null) {
             }
     
             if (data[index + 1] != null) {
-                window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=Home`
+                window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=home`
             }
         }
     })
@@ -361,9 +360,9 @@ if (document.querySelector('#backBtn') != null) {
 
 
         portBool = window.location.href.split('portfolio=')
-        let portUser = (portBool[1] === 'User');
-        let portGlobal = (portBool[1] === 'Global');
-        let portHome = (portBool[1] === 'Home');
+        let portUser = (portBool[1] === 'user');
+        let portGlobal = (portBool[1] === 'global');
+        let portHome = (portBool[1] === 'home');
         let userID = document.querySelector('#postBtnBox').getAttribute("userID");
         if (portGlobal) {
             const response = await fetch('/api/posts/getAllPost')
@@ -380,7 +379,7 @@ if (document.querySelector('#backBtn') != null) {
             }
 
             if (data[index - 1] != null) {
-                window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=Global`
+                window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=global`
             }
 
 
@@ -403,7 +402,7 @@ if (document.querySelector('#backBtn') != null) {
             }
 
             if (data.posts[index - 1] != null) {
-                window.location.href = `${baseURL}/post/${data.posts[index - 1].id}?portfolio=User`
+                window.location.href = `${baseURL}/post/${data.posts[index - 1].id}?portfolio=user`
             }
         }
 
@@ -424,7 +423,7 @@ if (document.querySelector('#backBtn') != null) {
             }
     
             if (data[index - 1] != null) {
-                window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=Home`
+                window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=home`
             }
         }
     })
