@@ -6,10 +6,12 @@ onPageLoad();
 
 async function onPageLoad() {
     portBool = window.location.href.split('portfolio=')
-    portBool = (portBool[1] === 'true')
-    console.log(portBool)
+    let portUser = (portBool[1] === 'User');
+    let portGlobal = (portBool[1] === 'Global');
+    let portHome = (portBool[1] === 'Home');
     let userID = document.querySelector('#postBtnBox').getAttribute("userID");
-    if (portBool == false) {
+    console.log(portUser)
+    if (portGlobal) {
         const response = await fetch('/api/posts/getAllPost')
         const data = await response.json();
         let splitLocation = window.location.href.split('/post/')
@@ -23,16 +25,18 @@ async function onPageLoad() {
         }
 
         if (data[index + 1] != null) {
-            document.querySelector('#forwardBtn').classList.remove('hide')
+            document.querySelector('#forwardBtn').classList.remove('disabled')
+            document.querySelector('#forwardBtn').classList.add('btn-primary')
         }
         if (data[index - 1] != null) {
-            document.querySelector('#backBtn').classList.remove('hide')
+            document.querySelector('#backBtn').classList.remove('disabled')
+            document.querySelector('#backBtn').classList.add('btn-primary')
         }
 
+    }
 
 
-
-    } else if (portBool == true && portBool != null) {
+    if (portUser) {
         const response = await fetch(`/api/users/getUser/${userID}`);
         const data = await response.json();
         let splitLocation = window.location.href.split('/post/')
@@ -46,10 +50,12 @@ async function onPageLoad() {
         }
 
         if (data.posts[index + 1] != null) {
-            document.querySelector('#forwardBtn').classList.remove('hide')
+            document.querySelector('#forwardBtn').classList.remove('disabled')
+            document.querySelector('#forwardBtn').classList.add('btn-primary')
         }
         if (data.posts[index - 1] != null) {
-            document.querySelector('#backBtn').classList.remove('hide')
+            document.querySelector('#backBtn').classList.remove('disabled')
+            document.querySelector('#backBtn').classList.add('btn-primary')
         }
     }
 }
@@ -254,10 +260,12 @@ if (document.querySelector('#forwardBtn') != null) {
 
 
         portBool = window.location.href.split('portfolio=')
-        portBool = (portBool[1] === 'true')
+        let portUser = (portBool[1] === 'User');
+        let portGlobal = (portBool[1] === 'Global');
+        let portHome = (portBool[1] === 'Home');
         //console.log(portBool)
         let userID = document.querySelector('#postBtnBox').getAttribute("userID");
-        if (portBool == false) {
+        if (portGlobal) {
             const response = await fetch('/api/posts/getAllPost')
             const data = await response.json();
             let splitLocation = window.location.href.split('/post/')
@@ -272,13 +280,15 @@ if (document.querySelector('#forwardBtn') != null) {
             }
 
             if (data[index + 1] != null) {
-                window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=false`
+                window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=Global`
             }
 
 
 
 
-        } else if (portBool == true && portBool != null) {
+        } 
+        
+        if (portUser) {
             const response = await fetch(`/api/users/getUser/${userID}`);
             const data = await response.json();
             let splitLocation = window.location.href.split('/post/')
@@ -293,7 +303,7 @@ if (document.querySelector('#forwardBtn') != null) {
             }
 
             if (data.posts[index + 1] != null) {
-                window.location.href = `${baseURL}/post/${data.posts[index + 1].id}?portfolio=true`
+                window.location.href = `${baseURL}/post/${data.posts[index + 1].id}?portfolio=User`
             }
         }
     })
@@ -306,10 +316,11 @@ if (document.querySelector('#backBtn') != null) {
 
 
         portBool = window.location.href.split('portfolio=')
-        portBool = (portBool[1] === 'true')
-        console.log(portBool)
+        let portUser = (portBool[1] === 'User');
+        let portGlobal = (portBool[1] === 'Global');
+        let portHome = (portBool[1] === 'Home');
         let userID = document.querySelector('#postBtnBox').getAttribute("userID");
-        if (portBool == false) {
+        if (portGlobal) {
             const response = await fetch('/api/posts/getAllPost')
             const data = await response.json();
             let splitLocation = window.location.href.split('/post/')
@@ -324,13 +335,15 @@ if (document.querySelector('#backBtn') != null) {
             }
 
             if (data[index - 1] != null) {
-                window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=false`
+                window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=Global`
             }
 
 
 
 
-        } else if (portBool == true && portBool != null) {
+        } 
+        
+        if (portUser) {
             const response = await fetch(`/api/users/getUser/${userID}`);
             const data = await response.json();
             let splitLocation = window.location.href.split('/post/')
@@ -345,7 +358,7 @@ if (document.querySelector('#backBtn') != null) {
             }
 
             if (data.posts[index - 1] != null) {
-                window.location.href = `${baseURL}/post/${data.posts[index - 1].id}?portfolio=true`
+                window.location.href = `${baseURL}/post/${data.posts[index - 1].id}?portfolio=User`
             }
         }
     })

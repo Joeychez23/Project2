@@ -1,9 +1,9 @@
 <div id="postBtnBox" userID="{{user_id}}">
     <a href='/portfolio/{{user_id}}'>
-        <button id="toPort">View Author Portfolio</button>
+        <button class="btn btn-primary" id="toPort">View Author Portfolio</button>
     </a>
 </div>
-<div class="defaultClass">
+<div id="post" class="defaultClass">
     <div>
         <div class="postImage" style="background-image: url('{{{base64}}}');"></div>
         <div class="defaultClass">
@@ -14,12 +14,12 @@
 </div>
 
 <div id="postBtnBox" userID="{{user_id}}">
-    <button class="hide" id="backBtn">Previous Post</button>
-    <button class="hide" id="forwardBtn">Next Post</button>
+    <button class="btn disabled" id="backBtn">Previous Post</button>
+    <button class="btn disabled" id="forwardBtn">Next Post</button>
 </div>
 
 {{#if logged_in }}
-<div class="defaultClass">
+<div id="comments" class="defaultClass">
     <form postId={{id}}>
         <div>
             <textarea id='comment_description' placeholder="Enter a comment here..." cols="30" rows="2"></textarea>
@@ -50,7 +50,7 @@
 
 
 {{else}}
-<div class="defaultClass">
+<div id="comments" class="defaultClass">
     <h2>Comments</h2>
     {{#each comments as |comment|}}
     <div class="defaultClass">

@@ -1,5 +1,19 @@
+
+
+button:hover {
+    opacity: 75%;
+}
+
+#root {
+    margin-top: 60px;
+}
+
+
+
 .M {
     /*border: 2px solid red;*/
+    position: fixed;
+    top: 0px;
     display: flex;
     height: 60px;
     background-color: blue;
@@ -144,6 +158,10 @@
 
 /* post.handlebars*/
 
+#comments {
+    margin-top: 12.5px;
+}
+
 #postBtnBox {
     margin-top: 5px;
     width: 100%;
@@ -172,6 +190,10 @@
     border: 2px solid black;
     margin-top: 5px;
     padding: 5px;
+}
+
+#post {
+    margin-top: 12.5px;
 }
 
 
@@ -203,3 +225,16 @@
     display: inline-flex;
     flex-wrap: wrap;
 }
+
+
+
+#followBtn {
+    margin: 20px 0px;
+    width: 175px;
+}
+
+#currDashBtn a {
+    color: white;
+}
+
+

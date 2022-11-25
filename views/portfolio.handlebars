@@ -2,11 +2,18 @@
     <div>
         <div class="col-md-12">
             <h2>{{username}}'s Portfolio</h2>
+            <div>
+                <div class="hide" id="followers">Followers: </div>
+                <div class="hide" id="following">Following: </div>
+            </div>
         </div>
     </div>
 
     {{#if logged_in}}
-    <button class="hide" id="followBtn" value="0" logID="{{currUser}}">Follow</button>
+    {{#ifCond id '!=' currUser}}
+    <button class="btn btn-primary" id="followBtn" value="0" logID="{{currUser}}">Follow</button>
+    {{/ifCond}}
+
     {{/if}}
     <!--If posts.length != NULL -->
     {{#if posts.length}}
@@ -17,7 +24,7 @@
             {{#each posts as |post|}}
             <div class="row defaultRowClass">
                 <div class="col-md-12">
-                    <a href="/post/{{post.id}}?portfolio=true">
+                    <a href="/post/{{post.id}}?portfolio=User">
                         <div class="portImage" style="background-image: url('{{{post.base64}}}');"></div>
                     </a>
                 </div>
@@ -28,4 +35,3 @@
     {{/if}}
     <script src="../javascripts/portfolio.js"></script>
 </div>
-

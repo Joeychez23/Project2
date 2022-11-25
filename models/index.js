@@ -20,15 +20,4 @@ Comment.belongsTo(User, {
     foreignKey: 'user_id',
 })
 
-/*
-User.hasMany(FollowData, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE'
-});
-
-
-FollowData.belongsTo(User, {
-    foreignKey: 'user_id',
-})*/
-
 module.exports = { Post, Comment, User, FollowData};

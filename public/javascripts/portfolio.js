@@ -5,6 +5,47 @@ const portfolioID = document.querySelector('#portfolio').getAttribute('fromID');
 
 
 
+async function setFollowData() {
+    const response = await fetch(`/api/users/getFollowData/${portfolioID}`);
+    const data = await response.json();
+
+    const setFollowers = document.querySelector('#followers')
+
+    const setFollowing = document.querySelector('#following')
+
+    let followers = data.followers.split(',')
+
+    let following = data.following.split(',')
+
+    if (followers == '') {
+        followers = 0;
+    }
+
+    else {
+        followers = followers.length
+    }
+    
+
+    if (following == '') {
+        following = 0;
+    }
+
+    else {
+        following = following.length
+    }
+
+    setFollowers.innerHTML = `<a href="#">Followers</a>: ${followers}`;
+
+    setFollowing.innerHTML = `<a href="#">Following</a>: ${following}`;
+
+    setFollowers.classList.remove('hide')
+
+    setFollowing.classList.remove('hide')
+}
+
+setFollowData();
+
+
 
 
 
@@ -34,6 +75,8 @@ if (followBtn != null) {
         if (following == true) {
             followBtn.innerText = "Unfollow"
             followBtn.value = 1
+            followBtn.classList.remove('btn-primary')
+            followBtn.classList.add('btn-danger')
         }
 
         if (data.id != portfolioID) {

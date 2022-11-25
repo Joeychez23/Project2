@@ -29,8 +29,9 @@
 <body>
     <nav class="M">
         <ul class="M-L">
-            <li id="homeBtn" class="M-L-I"><a class="M-L-I-A" href="/">Home</a></li>
+            <li id="globalBtn" class="M-L-I"><a class="M-L-I-A" href="/">Global</a></li>
             {{#if logged_in}}
+            <li id="globalBtn" class="M-L-I"><a class="M-L-I-A" href="/home">Home</a></li>
             <li id="dashboardBtn" class="M-L-I"><a class="M-L-I-A" href="/dashboard">Dashboard</a></li>
             <li id="logoutBtn" class="M-L-I"><a class="M-L-I-A">Logout</a></li>
             {{else}}

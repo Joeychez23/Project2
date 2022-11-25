@@ -12,6 +12,8 @@ router.post('/', async function (req, res) {
 
         const FollowConnect = await FollowData.create({
             id: data.id,
+            following: '',
+            followers: '',
         })
 
         req.session.save(function () {
