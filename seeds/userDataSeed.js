@@ -11,7 +11,7 @@ const data = [
   },
   {
     id: 3,
-    username: "public",
+    username: "Public",
     password: "password",
   },
 ];
