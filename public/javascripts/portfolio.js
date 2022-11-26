@@ -34,9 +34,9 @@ async function setFollowData() {
         following = following.length
     }
 
-    setFollowers.innerHTML = `<a href="#">Followers</a>: ${followers}`;
+    setFollowers.innerHTML = `<a href="/followers/${portfolioID}">Followers</a>: ${followers}`;
 
-    setFollowing.innerHTML = `<a href="#">Following</a>: ${following}`;
+    setFollowing.innerHTML = `<a href="/following/${portfolioID}">Following</a>: ${following}`;
 
     setFollowers.classList.remove('hide')
 

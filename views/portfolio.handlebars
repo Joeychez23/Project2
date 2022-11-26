@@ -10,8 +10,8 @@
     </div>
 
     {{#if logged_in}}
-    {{#ifCond id '!=' currUser}}
-    <button class="btn btn-primary" id="followBtn" value="0" logID="{{currUser}}">Follow</button>
+    {{#ifCond id '!=' logUser}}
+    <button class="btn btn-primary" id="followBtn" value="0" logID="{{logUser}}">Follow</button>
     {{/ifCond}}
 
     {{/if}}
