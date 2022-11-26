@@ -5,11 +5,11 @@ async function checkLogin(event) {
     event.preventDefault();
 
     //Grabs username and password values from textbox
-    const username = document.getElementById('userLog').value.trim();
+    const email = document.getElementById('emailLog').value.trim();
     const password = document.getElementById('passLog').value.trim();
 
     //Check if username and password != NULL
-    if (username && password) {
+    if (email && password) {
 
         //What to send
         const options = {
@@ -17,7 +17,7 @@ async function checkLogin(event) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, password })
         }
 
         //Send / Receive                //Location

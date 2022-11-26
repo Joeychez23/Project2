@@ -121,6 +121,18 @@ button:hover {
 }
 
 
+
+/*login*/
+
+
+#emailLog {
+    width: 250px;
+}
+
+#passLog {
+    width: 250px;
+}
+
 /* dashboard.handlebars*/
 
 #displayImage {

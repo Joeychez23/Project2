@@ -3,11 +3,13 @@ async function checkSignup(event) {
 
 
     //Grabs username and password values from textbox
+    const email = document.getElementById('emailSign').value.trim();
     const username = document.getElementById('userSign').value.trim();
-    const password = document.getElementById('passSign').value.trim();
+    const password1 = document.getElementById('passSign1').value.trim();
+    const password2 = document.getElementById('passSign2').value.trim();
 
     //Check if username and password != NULL
-    if (username && password) {
+    if (username && password1 && password2 && email && password1 == password2) {
 
         //What to send
         const options = {
@@ -15,7 +17,11 @@ async function checkSignup(event) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ 
+                email: email, 
+                username: username, 
+                password: password2,
+            })
         }
 
         //Send / Receive                //Location
@@ -29,6 +35,8 @@ async function checkSignup(event) {
         } else {
             alert(response.statusText);
         }
+    } else {
+        alert("Invalid Inputs");
     }
 }
 
