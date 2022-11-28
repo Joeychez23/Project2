@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Post, FollowData} = require('../../models');
 const withAuth = require('../../utils/auth');
+const validator = require('validator')
 
 
 
@@ -153,6 +154,35 @@ router.post('/updateUser/:id', withAuth, async function(req, res) {
         res.status(400).json(err);
     }
 });
+
+
+router.post('/settingUpdate', withAuth, async function(req, res) {
+    const data = await User.findByPk(req.session.user_id)
+
+    const validatePassword = data.checkPassword(req.body.currPass);
+
+
+    if (!validatePassword) {
+        res.status(400).json({ message: 'Incorrect Password' })
+        return
+    }
+
+    if(validator.isEmail(`${req.body.email}`) != true) {
+        res.status(400).json({ message: 'Incorrect Email' })
+        return
+    }
+
+
+    await data.update({
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+    })
+
+
+    res.status(200).json(data);
+
+})
 
 
 

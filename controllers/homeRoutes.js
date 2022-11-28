@@ -385,4 +385,30 @@ router.get('/followers/:id', async function (req, res) {
 
 
 
+
+router.get('/settings', withAuth, async function(req, res) {
+	try {
+		const data = await User.findByPk(req.session.user_id, {
+			attributes: {
+				exclude: ['password']
+			}
+		})
+
+		const user = await data.get({
+			plain: true
+		})
+
+
+		res.render('settings', {
+			logUser: req.session.user_id,
+			...user,
+			logged_in: req.session.logged_in,
+		})
+	} catch (err) {
+		res.status(500).json(err);
+	}
+})
+
+
+
 module.exports = router;
