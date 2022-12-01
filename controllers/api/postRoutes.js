@@ -89,6 +89,8 @@ router.get('/getAllPost', async function(req, res) {
             return
         }
 
+        console.log(data)
+
         res.json(data)
     } 
     catch (err) {
