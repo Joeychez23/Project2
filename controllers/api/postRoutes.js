@@ -84,6 +84,11 @@ router.get('/getAllPost', async function(req, res) {
             //order: [["data_created", "DESC"]]
         });
 
+        if(!data) {
+            res.status(404).json({message: 'Post not found'})
+            return
+        }
+
         let posts = new Array
 		for (let i = 0; i < data.length; i++) {
 			posts[posts.length] = data[i].get({
@@ -94,11 +99,6 @@ router.get('/getAllPost', async function(req, res) {
         posts.sort(function (a, b) {
 			return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
 		})
-
-        if(!data) {
-            res.status(404).json({message: 'Post not found'})
-            return
-        }
 
 
         res.json(posts)
