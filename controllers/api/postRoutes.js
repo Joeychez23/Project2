@@ -81,8 +81,17 @@ router.get('/getPost/:id',  withAuth, async function(req, res) {
 router.get('/getAllPost', async function(req, res) {
     try {;
         const data = await Post.findAll({
-            order: [["data_created", "DESC"]]
+            //order: [["data_created", "DESC"]]
         });
+
+        let posts = new Array
+		for (let i = 0; i < data.length; i++) {
+			posts[posts.length] = data[i].get({
+				plain: true
+			})
+		}
+
+        console.log(posts)
 
         if(!data) {
             res.status(404).json({message: 'Post not found'})
