@@ -93,12 +93,16 @@ router.get('/getAllPost', async function(req, res) {
 
         console.log(posts)
 
+        posts.sort(function (a, b) {
+			return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
+		})
+
         if(!data) {
             res.status(404).json({message: 'Post not found'})
             return
         }
 
-        console.log(data)
+        console.log(posts)
 
         res.json(data)
     } 
