@@ -35,6 +35,7 @@ router.get('/', async function (req, res) {
 
 
 
+
 		res.render('global', {
 			logUser: req.session.user_id,
 			posts,
