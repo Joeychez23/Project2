@@ -6,8 +6,8 @@ const data = [
     },
     {
       id: 2,
-      following: "1,3",
-      followers: "1,3",
+      following: "1,3,4,5,6,7,8,9,10",
+      followers: "1,3,4,5,6,7,8,9,10",
     },
     {
       id: 3,
