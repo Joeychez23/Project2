@@ -91,8 +91,6 @@ router.get('/getAllPost', async function(req, res) {
 			})
 		}
 
-        console.log(posts)
-
         posts.sort(function (a, b) {
 			return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
 		})
@@ -102,9 +100,8 @@ router.get('/getAllPost', async function(req, res) {
             return
         }
 
-        console.log(posts)
 
-        res.json(data)
+        res.json(posts)
     } 
     catch (err) {
         res.status(500).json(err);
