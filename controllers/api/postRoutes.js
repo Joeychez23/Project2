@@ -80,7 +80,9 @@ router.get('/getPost/:id',  withAuth, async function(req, res) {
 
 router.get('/getAllPost', async function(req, res) {
     try {;
-        const data = await Post.findAll();
+        const data = await Post.findAll({
+            order: [["data_created", "DESC"]]
+        });
 
         if(!data) {
             res.status(404).json({message: 'Post not found'})
@@ -153,6 +155,10 @@ router.get('/userHomeData', async function(req, res) {
 					posts[posts.length] = addPostData
 				}
 			}
+
+            posts.sort(function (a, b) {
+                return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
+            })
 
             res.json(posts)
 		} else {

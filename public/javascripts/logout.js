@@ -64,13 +64,26 @@ searchInput.addEventListener("input", function (event) {
     const elements = document.querySelectorAll(".singleCard")
     const nameLink = document.querySelectorAll(".nameLink")
     for (let i = 0; i < elements.length; i++) {
-        const isVisible = nameLink[i].value.includes(input);
-        elements[i].classList.toggle('hide', !isVisible)
+        elements[i].classList.add('hide')
+
+    }
+    countVis = 0;
+    for (let i = 0; i < elements.length; i++) {
+        currName = nameLink[i].value
+        let check = ''
+        for(let i =0; i < input.length; i++) {
+            check += currName[i]
+        }
+        const isVisible = check === input;
+        if(countVis < 8 && isVisible == true) {
+            countVis += 1
+            elements[i].classList.remove('hide', !isVisible)
+        }
     }
     if (input.length == 0) {
         const elements = document.querySelectorAll(".singleCard")
         for (let i = 0; i < elements.length; i++) {
-            elements[i].classList.toggle('hide')
+            elements[i].classList.add('hide')
         }
     }
 })
@@ -80,13 +93,14 @@ document.querySelector('#root').addEventListener('click', function () {
     for (let i = 0; i < elements.length; i++) {
         elements[i].classList.add('hide')
     }
+    searchInput.value = ''
 })
 
 
 searchInput.addEventListener('click', function () {
     const elements = document.querySelectorAll(".singleCard")
     for (let i = 0; i < elements.length; i++) {
-        elements[i].classList.remove('hide')
+        //elements[i].classList.remove('hide')
     }
 })
 
@@ -105,12 +119,13 @@ async function setSearchBar() {
         const nameLink = card.querySelector(".nameLink")
         username.innerText = `${data[i].username}`;
         username.setAttribute('href', `/portfolio/${data[i].id}`);
+        username.classList.add('userLink2')
         nameLink.value = `${data[i].username.toLowerCase()}`
         cardContainer.append(card);
     }
     const elements = document.querySelectorAll(".singleCard")
     for (let i = 0; i < elements.length; i++) {
-        elements[i].classList.toggle('hide')
+        elements[i].classList.add('hide')
     }
 
 }

@@ -1,55 +1,65 @@
 <div id="dashBox" class="defaultClass">
-    <div>
-        <div class="col-md-12">
-            <h2>{{username}} Dashboard</h2>
+    <div class="">
+        <div class="col-md-12 centerContent">
+            <a href='/portfolio/{{logUser}}'>
+                <h2 class="userLink3">{{username}} Dashboard</h2>
+            </a>
         </div>
-        <a href='/portfolio/{{logUser}}'>
-            <button id="toPort" class="btn btn-primary">View Your Portfolio</button>
-        </a>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12 centerContent">
             <h3>Create post</h3>
+        </div>
+        <div class="col-md-12">
             <form class="formBox">
-                <div>
-                    <input type="file" id="imageInput" accept="image/png image/jpg" />
+                <div class="row centerContent">
+                    <div class="centerContent">
+                        <input type="file" id="imageInput" accept="image/png image/jpg" />
+                    </div>
                     <div id="displayImage"></div>
                 </div>
-                <div>
+                <div class="centerContent">
                     <textarea type="text" id="postContent" placeholder="Enter a post content here..." cols="30"
                         rows="2"></textarea>
                 </div>
-                <div>
+                <div class="centerContent">
                     <button id="subUp" class="btn btn-primary" commentId=''>Update</button>
                     <button id="creUp" class="btn btn-primary">Create</button>
                 </div>
-
             </form>
         </div>
+    </div>
 
-        <!--If posts.length != NULL -->
-        {{#if posts.length}}
-        <div class="col-md-6 userpost">
+    <!--If posts.length != NULL -->
+    <!--<div class="row">-->
+    {{#if posts.length}}
+    <div class="col-md-12">
+        <div id="currPostTitle" class="centerContent">
             <h3>Current posts:</h3>
-
-            <!--If for each index of posts create post meaning the code below -->
+        </div>
+        <!--If for each index of posts create post meaning the code below -->
+        <div class="row">
             {{#each posts as |post|}}
-            <div class="row defaultRowClass">
-                <div class="col-md-8">
-                    <a href="/post/{{post.id}}?portfolio=user">
-                        <div class="dashImage" style="background-image: url('{{{post.base64}}}');"></div>
-                    </a>
-                    <!--<h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>-->
-                </div>
-                <div class="col-md-4 buttonBox">
-                    <button class="btn btn-success upBtn" postId="{{post.id}}">UPDATE</button><button
-                        class="btn btn-danger delBtn" postId="{{post.id}}">DELETE</button>
+            <div class="col-sm-4" id="dashPostBox">
+                <div class="row defaultRowClass">
+                    <div class="col-md-12" id="smallBtnBox">
+                        <a href="/post/{{post.id}}?portfolio=user">
+                            <div class="dashImage" style="background-image: url('{{{post.base64}}}');"></div>
+                        </a>
+                        <!--<h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>-->
+                    </div>
+                    <div class="col-md-12 buttonBox">
+                        <button class="btn btn-success upBtn" postId="{{post.id}}">UPDATE</button><button
+                            class="btn btn-danger delBtn" postId="{{post.id}}">DELETE</button>
+                    </div>
                 </div>
             </div>
             {{/each}}
         </div>
-        {{/if}}
     </div>
+    {{/if}}
+    <!--</div>-->
+</div>
 </div>
 
 <script src="./javascripts/dashboard.js"></script>

@@ -13,6 +13,7 @@ async function onPageLoad() {
     if (portGlobal) {
         const response = await fetch('/api/posts/getAllPost')
         const data = await response.json();
+        console.log(data)
         let splitLocation = window.location.href.split('/post/')
         splitLocation = splitLocation[1].split('?');
         let currPostId = Number(splitLocation[0]);
@@ -38,6 +39,8 @@ async function onPageLoad() {
     if (portUser) {
         const response = await fetch(`/api/users/getUser/${userID}`);
         const data = await response.json();
+
+        console.log(data)
         let splitLocation = window.location.href.split('/post/')
         splitLocation = splitLocation[1].split('?');
         let currPostId = Number(splitLocation[0]);

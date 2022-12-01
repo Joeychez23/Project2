@@ -1,37 +1,45 @@
 <div class="defaultClass" id="portfolio" fromID="{{id}}">
     <div>
-        <div class="col-md-12">
-            <h2>{{username}}'s Portfolio</h2>
-            <div>
-                <div class="hide" id="followers">Followers: </div>
-                <div class="hide" id="following">Following: </div>
-            </div>
+        <div class="col-md-12 centerContent">
+            <h2 class="">{{username}}'s Portfolio</h2>
+        </div>
+        <div class="col-md-12 centerContent">
+            <div class="hide" id="followers">Followers: </div>
+        </div>
+        <div class="col-md-12 centerContent">
+            <div class="hide" id="following">Following: </div>
         </div>
     </div>
+</div>
 
-    {{#if logged_in}}
-    {{#ifCond id '!=' logUser}}
+{{#if logged_in}}
+{{#ifCond id '!=' logUser}}
+<div class="col-md-12 centerContent">
     <button class="btn btn-primary" id="followBtn" value="0" logID="{{logUser}}">Follow</button>
-    {{/ifCond}}
+</div>
+{{/ifCond}}
 
-    {{/if}}
-    <!--If posts.length != NULL -->
-    {{#if posts.length}}
-    <div class="col-md-12">
-        <h3>Current posts:</h3>
-        <div class="userPort">
-            <!--If for each index of posts create post meaning the code below -->
-            {{#each posts as |post|}}
+{{/if}}
+<!--If posts.length != NULL -->
+{{#if posts.length}}
+<div id="portTitle" class="col-md-12 centerContent">
+    <h3>Current posts:</h3>
+</div>
+<div class="row">
+    <!--If for each index of posts create post meaning the code below -->
+        {{#each posts as |post|}}
+        <div class="col-md-4 centerContent setWidth">
             <div class="row defaultRowClass">
                 <div class="col-md-12">
                     <a href="/post/{{post.id}}?portfolio=user">
-                        <div class="portImage" style="background-image: url('{{{post.base64}}}');"></div>
+                        <div class="homeImage" style="background-image: url('{{{post.base64}}}');"></div>
                     </a>
                 </div>
             </div>
-            {{/each}}
         </div>
+        {{/each}}
     </div>
-    {{/if}}
-    <script src="../javascripts/portfolio.js"></script>
+</div>
+{{/if}}
+<script src="../javascripts/portfolio.js"></script>
 </div>

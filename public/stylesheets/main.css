@@ -1,11 +1,52 @@
 
 
 button:hover {
-    opacity: 75%;
+    opacity: 85%;
 }
 
 #root {
     margin-top: 70px;
+}
+
+.userLink {
+    transition: .20s ease-out;
+    text-decoration: underline;
+    font-style: italic;
+    color: black
+}
+
+.userLink:hover {
+    transition: .20s ease-in;
+    text-decoration: underline;
+    color: blue;
+    font-size: 18px;
+}
+
+.userLink2 {
+    transition: .1s ease-out;
+    text-decoration: none;
+    font-style: italic;
+    color: white;
+}
+
+.userLink2:hover {
+    transition: .1s ease-in;
+    text-decoration: none;
+    color: yellow;
+}
+
+.userLink3 {
+    transition: .20s ease-out;
+    text-decoration: underline;
+    font-style: italic;
+    color: black
+}
+
+.userLink3:hover {
+    transition: .20s ease-in;
+    text-decoration: underline;
+    color: blue;
+    font-size: 36px;
 }
 
 
@@ -18,6 +59,7 @@ button:hover {
     height: 60px;
     background-color: blue;
     width: 100%;
+    z-index: 1001;
 }
 
 .M-L {
@@ -30,14 +72,22 @@ button:hover {
 
 .M-L-I {
     margin: 0px 10px;
-    /*border: 1px solid black;*/
     
     
 }
 
 .M-L-I-A {
+    transition: .1s ease-out;
+    width: 100%;
     text-decoration: none;
     color: white;
+}
+
+.M-L-I-A:hover {
+    transition: .1s ease-in;
+    margin-top: -20px;
+    text-decoration: none;
+    color: yellow;
 }
 
 
@@ -96,28 +146,61 @@ button:hover {
 
 
 
+
+
+
+
+
 /* home.handlebars*/
+
+.homeLink {
+    height: 300px;
+    width: 330px;
+    display: flex;
+    justify-content: center;
+}
 .homeImage {
-    height: 125px;
-    width: 120px;
+    transition: .25s ease-out;
+    height: 300px;
+    width: 330px;
     border: 1px solid black;
     background-position: center;
     background-size: cover;
 }
 
 .homeImage:hover {
+    transition: .1s ease-in;
     cursor: pointer;
+    opacity: 85%;
 }
 
 
-.homeLink {
-    height: 125px;
-    width: 120px;
-}
 .postPreview {
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     margin-top: 5px;
     padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.centerPost {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.underlineText {
+    text-decoration: underline;
+}
+
+.setWidth {
+    min-width: 340px;
+}
+
+
+#test1 {
+    display: inline;
+    flex-wrap: wrap;
 }
 
 
@@ -135,40 +218,86 @@ button:hover {
 
 /* dashboard.handlebars*/
 
+#dashbox {
+    display: flex;
+    justify-content: center;
+}
+
+#imageInput {
+    width: 300px;
+    padding-left: 42.5px;
+    display: flex;
+    justify-content: center;
+}
+
+.centerContent {
+    display: flex;
+    justify-content: center;
+}
+
 #displayImage {
     width: 275px;
     height: 211px;
-    border: 1px solid black;
     background-position: center;
     background-size: cover;
+    border: 1px solid black;
 }
 
+#currPostTitle {
+    margin-top: 50px;
 
+}
 .dashImage {
-    width: 75px;
-    height: 57px;
+    transition: .25s ease-out;
+    width: 170.5px;
+    height: 155px;
     border: 1px solid black;
     background-position: center;
     background-size: cover;
 }
-#postTitle {
-    width: 275px;
+
+.dashImage:hover {
+    transition: .1s ease-in;
+    opacity: 85%;
 }
+
+#smallBtnBox {
+    display: flex;
+    justify-content: center;
+}
+
+
 #subUp {
     display: none;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+#creUp {
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 #postContent {
     height: 80px;
 }
 
+#dashPostBox {
+    margin-top: 20px;
+}
+
 .buttonBox {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 
 /* post.handlebars*/
+
+#commentBox {
+    margin: 0px 10px;
+}
 
 #comments {
     margin-top: 12.5px;
@@ -183,12 +312,24 @@ button:hover {
     justify-content: space-between;*/
 }
 
+#portTitle {
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
 #backBtn {
     float: left;
+    margin-left: 10px;
 }
 
 #forwardBtn {
     float: right;
+    margin-right: 10px;
+}
+
+#imageBox {
+    display: flex;
+    justify-content: center;
 }
 
 .postImage {
@@ -198,6 +339,8 @@ button:hover {
     background-position: center;
     background-size: cover;
 }
+
+
 .postData {
     border: 2px solid black;
     margin-top: 5px;
@@ -225,11 +368,17 @@ button:hover {
 
 
 .portImage {
+    transition: .25s ease-out;
     width: 212.5px;
     height: 161.5px;
     border: 1px solid black;
     background-position: center;
     background-size: cover;
+}
+
+.portImage:hover {
+    transition: .1s ease-in;
+    opacity: 85%;
 }
 
 
@@ -250,3 +399,339 @@ button:hover {
 }
 
 
+
+
+/*login */
+
+#logBtn {
+    margin-top: 10px;
+}
+
+
+
+/*signup*/ 
+
+#signBtn {
+    margin-top: 10px;
+}
+
+
+/*setting */
+
+#setBtn {
+    margin-top: 10px;
+}
+
+
+
+@media screen and (max-width: 1035px) {
+    .homeLink {
+        height: 247px;
+        width: 275px;
+        display: flex;
+        justify-content: center;
+    }
+    .homeImage {
+        height: 247px;
+        width: 275px;
+        border: 1px solid black;
+        background-position: center;
+        background-size: cover;
+    }
+    .setWidth {
+        min-width: 275px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .homeLink {
+        height: 216px;
+        width: 240px;
+        display: flex;
+        justify-content: center;
+    }
+    .homeImage {
+        height: 216px;
+        width: 240px;
+        border: 1px solid black;
+        background-position: center;
+        background-size: cover;
+    }
+    .setWidth {
+        min-width: 216px;
+    }
+}
+
+
+
+@media screen and (max-width: 700px) {
+    .M-L-I {
+        margin: 0px 10px;
+        
+        
+    }
+    .M-L-I-A {
+        font-size: 15px;
+    }
+
+    #searchBox {
+        flex-wrap: wrap;
+        width: 150px;
+        z-index: 1000;
+        
+    }
+    
+    #search {
+        height: 24px;
+        width: 150px;
+    }
+
+    .nameBox {
+        background-color: blue;  
+        z-index: 1000;
+        float: right;
+        width: 150px;
+    }
+
+}
+
+
+@media screen and (max-width: 775px) {
+
+}
+
+
+@media screen and (max-width: 650px) {
+    .M-L-I {
+        margin: 0px 10px;
+        
+        
+    }
+    .M-L-I-A {
+        font-size: 13px;
+    }
+
+    #searchBox {
+        flex-wrap: wrap;
+        width: 150px;
+        z-index: 1000;
+        
+    }
+    
+    #search {
+        height: 20px;
+        width: 150px;
+    }
+
+    .nameBox {
+        background-color: blue;  
+        z-index: 1000;
+        float: right;
+        width: 150px;
+    }
+
+}
+
+
+@media screen and (max-width: 580px) {
+    .M-L-I {
+        margin: 0px 7px;
+        
+        
+    }
+    .M-L-I-A {
+        font-size: 12px;
+    }
+
+    #searchBox {
+        flex-wrap: wrap;
+        width: 150px;
+        z-index: 1000;
+        
+    }
+    
+    #search {
+        height: 18px;
+        width: 150px;
+    }
+
+    .nameBox {
+        background-color: blue;  
+        z-index: 1000;
+        float: right;
+        width: 150px;
+    }
+
+}
+
+
+@media screen and (max-width: 550px) {
+    .M-L-I {
+        margin: 0px 5px;
+        
+        
+    }
+    .M-L-I-A {
+        font-size: 12px;
+    }
+
+    #searchBox {
+        flex-wrap: wrap;
+        width: 120px;
+        z-index: 1000;
+        
+    }
+    
+    #search {
+        height: 18px;
+        width: 120px;
+    }
+
+    .nameBox {
+        background-color: blue;  
+        z-index: 1000;
+        float: right;
+        width: 120px;
+    }
+
+}
+
+@media screen and (max-width: 499px) {
+    .M-L {
+        margin-left: -10px;
+    }
+    .M-L-I {
+        margin: 0px 3.5px;
+        
+        
+    }
+    .M-L-I-A {
+        font-size: 11px;
+    }
+
+    #searchBox {
+        flex-wrap: wrap;
+        width: 120px;
+        z-index: 1000;
+        
+    }
+    
+    #search {
+        height: 18px;
+        width: 120px;
+    }
+
+    .nameBox {
+        background-color: blue;  
+        z-index: 1000;
+        float: right;
+        width: 120px;
+    }
+
+}
+
+@media screen and (max-width: 450px) {
+    .M-L {
+        margin-left: -15px;
+    }
+    .M-L-I {
+        margin: 0px 3px;
+        
+        
+    }
+    .M-L-I-A {
+        font-size: 10px;
+    }
+
+    #searchBox {
+        flex-wrap: wrap;
+        width: 120px;
+        z-index: 1000;
+        
+    }
+    
+    #search {
+        height: 18px;
+        width: 120px;
+    }
+
+    .nameBox {
+        background-color: blue;  
+        z-index: 1000;
+        float: right;
+        width: 120px;
+    }
+
+}
+
+
+@media screen and (max-width: 425px) {
+    .M-L {
+        margin-left: -25px;
+    }
+    .M-L-I {
+        margin: 0px 2px;
+        
+        
+    }
+    .M-L-I-A {
+        font-size: 10px;
+    }
+
+    #searchBox {
+        margin-left: 3px ;
+        flex-wrap: wrap;
+        width: 120px;
+        z-index: 1000;
+        
+    }
+    
+    #search {
+        height: 18px;
+        width: 120px;
+    }
+
+    .nameBox {
+        background-color: blue;  
+        z-index: 1000;
+        float: right;
+        width: 120px;
+    }
+
+}
+
+
+@media screen and (max-width: 400px) {
+    .M-L {
+        margin-left: -25px;
+    }
+    .M-L-I {
+        margin: 0px 2px;
+        
+        
+    }
+    .M-L-I-A {
+        font-size: 9px;
+    }
+
+    #searchBox {
+        margin-left: 3px ;
+        flex-wrap: wrap;
+        width: 120px;
+        z-index: 1000;
+        
+    }
+    
+    #search {
+        height: 18px;
+        width: 120px;
+    }
+
+    .nameBox {
+        background-color: blue;  
+        z-index: 1000;
+        float: right;
+        width: 120px;
+    }
+
+}

@@ -21,13 +21,27 @@ router.get('/', async function (req, res) {
 			})
 		}
 
+
+
+		let sortByDate = new Array
+
+		sortByDate = posts
+
+
+
+		posts.sort(function (a, b) {
+			return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
+		})
+
+
+
 		res.render('global', {
 			logUser: req.session.user_id,
 			posts,
 			logged_in: req.session.logged_in,
 		});
 	} catch (err) {
-		res.status(500).json(err)
+		res.render('error')
 	}
 });
 
@@ -98,6 +112,15 @@ router.get('/home', withAuth, async function (req, res) {
 			}
 
 
+
+
+			let sortByDate = new Array
+
+
+			posts.sort(function (a, b) {
+				return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
+			})
+
 			res.render('home', {
 				logUser: req.session.user_id,
 				posts,
@@ -113,7 +136,7 @@ router.get('/home', withAuth, async function (req, res) {
 		}
 
 	} catch (err) {
-		res.status(500).json(err)
+		res.render('error')
 	}
 });
 
@@ -161,7 +184,7 @@ router.get('/dashboard', withAuth, async function (req, res) {
 
 		})
 	} catch (err) {
-		res.status(500).json(err)
+		res.render('error')
 	}
 })
 
@@ -187,13 +210,12 @@ router.get('/post/:id', async function (req, res) {
 
 		});
 
-		const post = data.get({
+		let post = data.get({
 			plain: true
 		})
 
 		for (let i = 0; i < post.comments.length; i++) {
 			post.comments[i].currUser = req.session.user_id
-
 		}
 
 		res.render('post', {
@@ -202,7 +224,7 @@ router.get('/post/:id', async function (req, res) {
 			logged_in: req.session.logged_in,
 		});
 	} catch (err) {
-		res.status(500).json(err);
+		res.render('error')
 	}
 })
 
@@ -213,24 +235,30 @@ router.get('/portfolio/:id', async function (req, res) {
 	try {
 		const data = await User.findByPk(req.params.id, {
 			attributes: {
-				exclude: ['password']
+				exclude: ['password', 'email']
 			},
 			include: [{
-				model: Post
+				model: Post,
 			}],
 		})
 
-		const post = data.get({
+		const user = data.get({
 			plain: true
 		})
 
+
+		user.posts.sort(function (a, b) {
+			return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
+		})
+
+
 		res.render('portfolio', {
 			logUser: req.session.user_id,
-			...post,
+			...user,
 			logged_in: req.session.logged_in,
 		})
 	} catch (err) {
-		res.status(500).json(err);
+		res.render('error')
 	}
 })
 
@@ -240,154 +268,164 @@ router.get('/portfolio/:id', async function (req, res) {
 
 router.get('/following/:id', async function (req, res) {
 
-	const response = await FollowData.findByPk(req.params.id);
-	const followData = response.get({
-		plain: true
-	});
+	try {
+		const response = await FollowData.findByPk(req.params.id);
+		const followData = response.get({
+			plain: true
+		});
 
 
-	let userFollowing = followData.following.split(',')
+		let userFollowing = followData.following.split(',')
 
 
-	const currResponse = await User.findByPk(req.params.id, {
-		exclude: ['password']
-	})
-
-
-	const currData = currResponse.get({
-		plain: true
-	});
-
-
-	if (userFollowing == '') {
-		userFollowing = null;
-	}
-
-
-	let userIDs = new Array
-
-	let users = new Array
-
-
-	if (userFollowing != null) {
-		for (let i = 0; i < userFollowing.length; i++) {
-			userIDs[userIDs.length] = Number(userFollowing[i]);
-		}
-
-
-		for (let i = 0; i < userIDs.length; i++) {
-			const response = await User.findByPk(userIDs[i], {
-				attributes: {
-					exclude: ['password']
-				},
-			})
-			const data = await response.get({
-				plain: true
-			})
-			users[users.length] = data;
-		}
-	
-	
-		res.render('following', {
-			logUser: req.session.user_id,
-			currId: currData.id,
-			currUser: currData.username,
-			users,
-			logged_in: req.session.logged_in,
+		const currResponse = await User.findByPk(req.params.id, {
+			exclude: ['password']
 		})
 
 
-	} 
-	if (userFollowing == null) {
-		res.render('following', {
-			logUser: req.session.user_id,
-			currId: currData.id,
-			currUser: currData.username,
-			users,
-			logged_in: req.session.logged_in,
-		})
+		const currData = currResponse.get({
+			plain: true
+		});
 
+		console.log(currData)
+
+
+		if (userFollowing == '') {
+			userFollowing = null;
+		}
+
+
+		let userIDs = new Array
+
+		let users = new Array
+
+
+		if (userFollowing != null) {
+			for (let i = 0; i < userFollowing.length; i++) {
+				userIDs[userIDs.length] = Number(userFollowing[i]);
+			}
+
+
+			for (let i = 0; i < userIDs.length; i++) {
+				const response = await User.findByPk(userIDs[i], {
+					attributes: {
+						exclude: ['password']
+					},
+				})
+				const data = await response.get({
+					plain: true
+				})
+				users[users.length] = data;
+			}
+
+
+			res.render('following', {
+				logUser: req.session.user_id,
+				currId: currData.id,
+				currUser: currData.username,
+				users,
+				logged_in: req.session.logged_in,
+			})
+
+
+		}
+		if (userFollowing == null) {
+			res.render('following', {
+				logUser: req.session.user_id,
+				currId: currData.id,
+				currUser: currData.username,
+				users,
+				logged_in: req.session.logged_in,
+			})
+
+		}
+	} catch (err) {
+		res.render('error')
 	}
 })
 
 
 router.get('/followers/:id', async function (req, res) {
-
-	const response = await FollowData.findByPk(req.params.id);
-	const followData = response.get({
-		plain: true
-	});
-
-
-	let userFollowers = followData.followers.split(',')
+	try {
+		const response = await FollowData.findByPk(req.params.id);
+		const followData = response.get({
+			plain: true
+		});
 
 
-	const currResponse = await User.findByPk(req.params.id, {
-		exclude: ['password']
-	})
+		let userFollowers = followData.followers.split(',')
 
 
-	const currData = currResponse.get({
-		plain: true
-	});
-
-
-	if (userFollowers == '') {
-		userFollowers = null;
-	}
-
-
-	let userIDs = new Array
-
-	let users = new Array
-
-
-	if (userFollowers != null) {
-		for (let i = 0; i < userFollowers.length; i++) {
-			userIDs[userIDs.length] = Number(userFollowers[i]);
-		}
-
-
-		for (let i = 0; i < userIDs.length; i++) {
-			const response = await User.findByPk(userIDs[i], {
-				attributes: {
-					exclude: ['password']
-				},
-			})
-			const data = await response.get({
-				plain: true
-			})
-			users[users.length] = data;
-		}
-	
-	
-		res.render('following', {
-			logUser: req.session.user_id,
-			currId: currData.id,
-			currUser: currData.username,
-			users,
-			logged_in: req.session.logged_in,
+		const currResponse = await User.findByPk(req.params.id, {
+			exclude: ['password']
 		})
 
 
-	} 
-	if (userFollowers == null) {
-		res.render('following', {
-			logUser: req.session.user_id,
-			currId: currData.id,
-			currUser: currData.username,
-			users,
-			logged_in: req.session.logged_in,
-		})
+		const currData = currResponse.get({
+			plain: true
+		});
 
+
+		if (userFollowers == '') {
+			userFollowers = null;
+		}
+
+
+		let userIDs = new Array
+
+		let users = new Array
+
+
+		if (userFollowers != null) {
+			for (let i = 0; i < userFollowers.length; i++) {
+				userIDs[userIDs.length] = Number(userFollowers[i]);
+			}
+
+
+			for (let i = 0; i < userIDs.length; i++) {
+				const response = await User.findByPk(userIDs[i], {
+					attributes: {
+						exclude: ['password']
+					},
+				})
+				const data = await response.get({
+					plain: true
+				})
+				users[users.length] = data;
+			}
+
+
+			res.render('followers', {
+				logUser: req.session.user_id,
+				currId: currData.id,
+				currUser: currData.username,
+				users,
+				logged_in: req.session.logged_in,
+			})
+
+
+		}
+		if (userFollowers == null) {
+			res.render('followers', {
+				logUser: req.session.user_id,
+				currId: currData.id,
+				currUser: currData.username,
+				users,
+				logged_in: req.session.logged_in,
+			})
+
+		}
+	} catch (err) {
+		res.render('error')
 	}
 })
 
 
 
 
-router.get('/settings', withAuth, async function(req, res) {
+router.get('/settings', withAuth, async function (req, res) {
 	try {
+		setTimeout(function () { }, 2000)
 		const data = await User.findByPk(req.session.user_id, {
 			attributes: {
 				exclude: ['password']
@@ -399,13 +437,15 @@ router.get('/settings', withAuth, async function(req, res) {
 		})
 
 
-		res.render('settings', {
-			logUser: req.session.user_id,
-			...user,
-			logged_in: req.session.logged_in,
-		})
+		setTimeout(function () {
+			res.render('settings', {
+				logUser: req.session.user_id,
+				...user,
+				logged_in: req.session.logged_in,
+			})
+		}, 2000);
 	} catch (err) {
-		res.status(500).json(err);
+		res.render('error')
 	}
 })
 

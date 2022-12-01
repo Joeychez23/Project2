@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, Post, FollowData} = require('../../models');
 const withAuth = require('../../utils/auth');
 const validator = require('validator')
+const Sequelize = require('sequelize')
 
 
 
@@ -98,8 +99,27 @@ router.get('/', async function (req, res) {
     try {
         const data = await User.findAll({
             attributes: {
-				exclude: ['password']
-			}
+				exclude: ['password', 'email'],
+
+			},
+            order: Sequelize.literal('rand()'),
+        });
+        res.json(data);
+
+    } catch (err) {
+        res.json(err);
+    }
+})
+
+
+router.get('/allEmail', withAuth, async function (req, res) {
+    try {
+        const data = await User.findAll({
+            attributes: {
+				exclude: ['password', 'id', 'username'],
+
+			},
+            order: Sequelize.literal('rand()')
         });
         res.json(data);
 
@@ -112,6 +132,23 @@ router.get('/getUser/:id', async function (req, res) {
     try {
         const data = await User.findByPk(req.params.id,
         {
+            attributes: {
+				exclude: ['password', 'email']
+			},
+            include: {
+                model: Post
+            }
+        });
+        res.json(data);
+
+    } catch (err) {
+        res.json(err);
+    }
+})
+
+router.get('/getUserEmail/', withAuth, async function (req, res) {
+    try {
+        const data = await User.findByPk(req.session.user_id, {
             attributes: {
 				exclude: ['password']
 			},
@@ -173,11 +210,13 @@ router.post('/settingUpdate', withAuth, async function(req, res) {
     }
 
 
+
     await data.update({
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
     })
+
 
 
     res.status(200).json(data);

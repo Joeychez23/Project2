@@ -1,13 +1,13 @@
 
-<div>
-    <h2><a href="/portfolio/{{currId}}">{{currUser}}</a>'s Following:</h2>
+<div class="centerContent">
+    <h2><a class="userLink3" href="/portfolio/{{currId}}">{{currUser}}</a>'s Following:</h2>
 </div>
 {{#each users as |user|}}
 <div class="row defaultRowClass">
   <div class="container-fluid postPreview">
     <div class="row">
       <div class="col-md-12">
-        <h4><a href="/portfolio/{{id}}">{{user.username}}</a></h4>
+        <h6><a class="userLink" href="/portfolio/{{id}}">{{user.username}}</a></h6>
       </div>
     </div>
   </div>
