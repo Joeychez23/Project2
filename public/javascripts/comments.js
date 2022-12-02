@@ -205,7 +205,9 @@ async function createComment(event) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ postId, description })
+            body: JSON.stringify({ 
+                postId: postId, 
+                description: description })
         }
 
         //Send / Receive             //Location
