@@ -53,7 +53,6 @@ if (logoutBtn != null) {
 
 
 //Search Bar 
-
 const cardTemplate = document.querySelector(".userTemplate");
 const cardContainer = document.querySelector(".userCards");
 const searchInput = document.querySelector("#search");
@@ -88,6 +87,8 @@ searchInput.addEventListener("input", function (event) {
     }
 })
 
+
+//Click on body clears searchbar
 document.querySelector('#root').addEventListener('click', function () {
     const elements = document.querySelectorAll(".singleCard")
     for (let i = 0; i < elements.length; i++) {
@@ -97,15 +98,8 @@ document.querySelector('#root').addEventListener('click', function () {
 })
 
 
-searchInput.addEventListener('click', function () {
-    const elements = document.querySelectorAll(".singleCard")
-    for (let i = 0; i < elements.length; i++) {
-        //elements[i].classList.remove('hide')
-    }
-})
 
-
-
+//Sets searchbar
 async function setSearchBar() {
     const options = {
         method: 'GET'

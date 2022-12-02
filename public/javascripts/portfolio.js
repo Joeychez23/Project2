@@ -90,7 +90,7 @@ if (followBtn != null) {
 
 
 
-    
+    //Sets follow button event listener
     followBtn.addEventListener('click', async function () {
         let following;
         if (followBtn.value == 1) {
@@ -100,6 +100,8 @@ if (followBtn != null) {
             following = false;
         }
 
+
+        //If following when clicked 
         if (following == true) {
             const userResponse = await fetch(`/api/users/getFollowData/${currUser}`);
             const currUserData = await userResponse.json();
@@ -195,6 +197,7 @@ if (followBtn != null) {
 
         }
 
+        //If not following when clicked 
         if (following == false) {
             const userResponse = await fetch(`/api/users/getFollowData/${currUser}`);
             const currUserData = await userResponse.json();

@@ -5,7 +5,7 @@ onPageLoad();
 
 /*LOADS PAGE FUNCTION START*/
 
-
+//Runs on page load
 async function onPageLoad() {
     portBool = window.location.href.split('portfolio=')
     let portUser = (portBool[1] === 'user');
@@ -106,6 +106,7 @@ async function onPageLoad() {
 
 
 
+    //Sets amount of total like on page
     async function setLikeCount() {
 
 
@@ -131,7 +132,7 @@ async function onPageLoad() {
             countLikes = 0
         }
 
-        visLikes.innerHTML = `<a class="userLink" href="/likes/${currPostId}">Likes: ${countLikes}</a>`;
+        visLikes.innerHTML = `<a class="userLink" href="/likes/${currPostId}">Likes</a>: ${countLikes}`;
 
         visLikes.classList.remove('hide')
     }

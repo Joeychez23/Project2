@@ -33,12 +33,8 @@ async function checkSettingUpdate() {
 
     let repeatEmail = false;
 
-    //console.log(dataAll)
 
-    //console.log(userData)
-
-    //console.log(emailData)
-
+    //Checks for repeat usernames and emails
     for(let i = 0; i < dataAll.length; i++) {
         if(dataAll[i].username.toLowerCase() == username.toLowerCase() && dataAll[i].username.toLowerCase() != userData.username.toLowerCase()) {
             repeatUsername = true
@@ -48,9 +44,6 @@ async function checkSettingUpdate() {
         }
     }
 
-    //console.log(repeatUsername)
-
-    //console.log(repeatEmail)
 
     //Check if username and password != NULL
     if (username && password1 && password2 && email && password1 == password2  && currPass && repeatEmail == false && repeatUsername == false) {

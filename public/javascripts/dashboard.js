@@ -4,7 +4,7 @@ let uploadedImage = "";
 let base64;
 
 
-
+//When adding an image in the dashboard
 imageInput.addEventListener("change", function() {
     const reader = new FileReader();
     reader.addEventListener("load", function() {
