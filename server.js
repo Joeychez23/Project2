@@ -47,7 +47,7 @@ app.use(routes);
 
 
 setTimeout(async function () {
-    await sequelize.sync({ force: false })
+    //await sequelize.sync({ force: false })
     //await seed;
     await console.log(`\nDatabase initalized`);
     await app.listen(PORT);
