@@ -170,10 +170,17 @@ async function onPageLoad() {
             }
 
             if (liked == true) {
+                likeBtn.classList.remove('disabled')
                 likeBtn.innerText = "Unlike"
                 likeBtn.value = 1
-                likeBtn.classList.remove('btn-primary')
                 likeBtn.classList.add('btn-danger')
+            }
+
+            if (liked == false) {
+                likeBtn.classList.remove('disabled')
+                likeBtn.innerText = "Like"
+                likeBtn.value = 0
+                likeBtn.classList.add('btn-primary')
             }
         }
         setPage();
