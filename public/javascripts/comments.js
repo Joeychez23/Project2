@@ -1,3 +1,5 @@
+
+
 onPageLoad();
 
 
@@ -84,6 +86,96 @@ async function onPageLoad() {
             document.querySelector('#backBtn').classList.remove('disabled')
             document.querySelector('#backBtn').classList.add('btn-primary')
         }
+    }
+
+
+
+
+    const likeBtnBox = document.querySelector('#likeBtnBox')
+
+    const likeBtn = document.querySelector('#likeBtn')
+
+
+
+
+
+
+
+
+    const visLikes = document.querySelector('#likes')
+
+
+
+    async function setLikeCount() {
+
+
+        let splitLocation = window.location.href.split('/post/')
+        checkParams = splitLocation[1].split('?');
+        const currPostId = Number(checkParams[0]);
+        const response = await fetch(`/api/posts/getPost/${currPostId}`)
+        const data = await response.json()
+
+
+
+
+        let likes
+
+        let countLikes;
+
+        if (data.likes != null) {
+            likes = data.likes.split(',')
+            countLikes = likes.length
+        }
+
+        if (data.likes == null) {
+            countLikes = 0
+        }
+
+        visLikes.innerHTML = `<a class="userLink" href="/likes/${currPostId}">Likes: ${countLikes}</a>`;
+
+        visLikes.classList.remove('hide')
+    }
+    setLikeCount();
+
+
+
+
+    if (likeBtnBox != null) {
+        async function setPage() {
+
+
+            let splitLocation = window.location.href.split('/post/')
+            checkParams = splitLocation[1].split('?');
+            const currPostId = Number(checkParams[0]);
+            const response = await fetch(`/api/posts/getPost/${currPostId}`)
+            const data = await response.json()
+            logID = likeBtnBox.getAttribute('logID')
+
+
+
+            let currLikes = new Array
+
+            if (data.likes != null) {
+                currLikes = data.likes.split(',')
+            }
+
+            liked = false;
+
+
+            for (let i = 0; i < currLikes.length; i++) {
+                if (Number(currLikes[i]) == Number(logID)) {
+                    liked = true;
+                }
+            }
+
+            if (liked == true) {
+                likeBtn.innerText = "Unlike"
+                likeBtn.value = 1
+                likeBtn.classList.remove('btn-primary')
+                likeBtn.classList.add('btn-danger')
+            }
+        }
+        setPage();
     }
 }
 
@@ -312,8 +404,8 @@ if (document.querySelector('#forwardBtn') != null) {
 
 
 
-        } 
-        
+        }
+
         if (portUser) {
             const response = await fetch(`/api/users/getUser/${userID}`);
             const data = await response.json();
@@ -335,9 +427,9 @@ if (document.querySelector('#forwardBtn') != null) {
 
         if (portHome) {
             const response = await fetch(`/api/posts/userHomeData`);
-    
+
             const data = await response.json()
-    
+
             let splitLocation = window.location.href.split('/post/')
             let baseURL = splitLocation[0]
             splitLocation = splitLocation[1].split('?');
@@ -348,7 +440,7 @@ if (document.querySelector('#forwardBtn') != null) {
                     index = i;
                 }
             }
-    
+
             if (data[index + 1] != null) {
                 window.location.href = `${baseURL}/post/${data[index + 1].id}?portfolio=home`
             }
@@ -388,8 +480,8 @@ if (document.querySelector('#backBtn') != null) {
 
 
 
-        } 
-        
+        }
+
         if (portUser) {
             const response = await fetch(`/api/users/getUser/${userID}`);
             const data = await response.json();
@@ -411,9 +503,9 @@ if (document.querySelector('#backBtn') != null) {
 
         if (portHome) {
             const response = await fetch(`/api/posts/userHomeData`);
-    
+
             const data = await response.json()
-    
+
             let splitLocation = window.location.href.split('/post/')
             let baseURL = splitLocation[0]
             splitLocation = splitLocation[1].split('?');
@@ -424,13 +516,139 @@ if (document.querySelector('#backBtn') != null) {
                     index = i;
                 }
             }
-    
+
             if (data[index - 1] != null) {
                 window.location.href = `${baseURL}/post/${data[index - 1].id}?portfolio=home`
             }
         }
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Like Button Click
+const likeBtnBox = document.querySelector('#likeBtnBox')
+
+const likeBtn = document.querySelector('#likeBtn')
+
+if (likeBtnBox != null) {
+    likeBtn.addEventListener('click', async function () {
+        let splitLocation = window.location.href.split('/post/')
+        checkParams = splitLocation[1].split('?');
+        const currPostId = Number(checkParams[0]);
+        const response = await fetch(`/api/posts/getPost/${currPostId}`)
+        const data = await response.json()
+        logID = likeBtnBox.getAttribute('logID')
+        let liked;
+
+        if (likeBtn.value == 1) {
+            liked = true
+        }
+
+        if (likeBtn.value == 0) {
+            liked = false
+        }
+
+
+        if (liked == true) {
+
+            let likeArr = new Array
+
+
+            if (data.likes != null) {
+                likeArr = data.likes.split(',')
+            }
+
+            if (data.likes == null) {
+                likeArr = ""
+            }
+
+            let likeStr = "";
+            for (let i = 0; i < likeArr.length; i++) {
+                if (Number(likeArr[i]) != Number(logID)) {
+                    likeStr += `${Number(likeArr[i])}`
+                    likeStr += ','
+                }
+            }
+
+
+            likeStr = likeStr.substring(0, likeStr.length - 1)
+
+            console.log(likeStr)
+
+            const likes = likeStr
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    likes: likes
+                })
+            }
+
+            const upResponse = await fetch(`/api/posts//updateLikes/${currPostId}`, options);
+
+            if (upResponse.ok) {
+                window.location.reload();
+            }
+        }
+
+        if (liked == false) {
+
+            let likeStr;
+            if (data.likes != null) {
+                likeStr = data.likes;
+                likeStr += `,${logID}`
+            }
+
+            if (data.likes == null) {
+                likeStr = "";
+                likeStr += `${logID}`
+            }
+
+
+            const likes = likeStr
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    likes: likes
+                })
+            }
+
+            const upResponse = await fetch(`/api/posts//updateLikes/${currPostId}`, options);
+
+            if (upResponse.ok) {
+                window.location.reload();
+            }
+        }
+    })
+}
+
 
 
 

@@ -18,7 +18,7 @@ router.post('/', withAuth, async function(req, res) {
     }
 });
 
-
+//Updates Post
 router.post('/:id', withAuth, async function(req, res) {
     try {
         const data = await Post.findByPk(req.params.id);
@@ -59,7 +59,8 @@ router.delete('/:id', withAuth, async function(req, res) {
     }
 })
 
-router.get('/getPost/:id',  withAuth, async function(req, res) {
+//Gets Post by ID
+router.get('/getPost/:id', async function(req, res) {
     try {
         const data = await Post.findByPk(req.params.id);
 
@@ -78,10 +79,10 @@ router.get('/getPost/:id',  withAuth, async function(req, res) {
     }
 })
 
+//Gets all Posts
 router.get('/getAllPost', async function(req, res) {
     try {;
         const data = await Post.findAll({
-            //order: [["data_created", "DESC"]]
         });
 
         if(!data) {
@@ -109,7 +110,8 @@ router.get('/getAllPost', async function(req, res) {
 })
 
 
-router.get('/userHomeData', async function(req, res) {
+//Get all of a users home data
+router.get('/userHomeData', withAuth, async function(req, res) {
     try {
 		const response = await FollowData.findByPk(req.session.user_id);
 		const followData = response.get({
@@ -182,6 +184,23 @@ router.get('/userHomeData', async function(req, res) {
 		res.status(500).json(err)
 	}
 })
+
+
+//Updates the likes on a post
+router.post('/updateLikes/:id', withAuth, async function(req, res) {
+    try {
+        const data = await Post.findByPk(req.params.id);
+        await data.update({
+            likes: req.body.likes
+        })
+
+        await data.save();
+        res.status(200).json(data);
+    } 
+    catch (err) {
+        res.status(400).json(err);
+    }
+});
 
 
 

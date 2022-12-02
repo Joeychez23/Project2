@@ -4,7 +4,7 @@ const followBtn = document.querySelector('#followBtn');
 const portfolioID = document.querySelector('#portfolio').getAttribute('fromID');
 
 
-
+//Sets the following data on page and links 
 async function setFollowData() {
     const response = await fetch(`/api/users/getFollowData/${portfolioID}`);
     const data = await response.json();
@@ -50,7 +50,7 @@ setFollowData();
 
 
 
-
+//Sets the following button
 if (followBtn != null) {
     const currUser = followBtn.getAttribute('logID');
     async function setPage() {
@@ -90,6 +90,7 @@ if (followBtn != null) {
 
 
 
+    
     followBtn.addEventListener('click', async function () {
         let following;
         if (followBtn.value == 1) {

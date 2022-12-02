@@ -47,7 +47,7 @@ router.get('/', async function (req, res) {
 });
 
 
-
+//Renders home page
 router.get('/home', withAuth, async function (req, res) {
 	try {
 		const response = await FollowData.findByPk(req.session.user_id);
@@ -113,11 +113,6 @@ router.get('/home', withAuth, async function (req, res) {
 			}
 
 
-
-
-			let sortByDate = new Array
-
-
 			posts.sort(function (a, b) {
 				return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
 			})
@@ -160,7 +155,7 @@ router.get('/signup', async function (req, res) {
 	res.render('signup')
 })
 
-
+//Renders dashboard
 router.get('/dashboard', withAuth, async function (req, res) {
 	try {
 
@@ -176,6 +171,10 @@ router.get('/dashboard', withAuth, async function (req, res) {
 
 		const user = data.get({
 			plain: true
+		})
+
+		user.posts.sort(function (a, b) {
+			return new Date(`${b.data_created}`).getTime() - new Date(`${a.data_created}`).getTime()
 		})
 
 		res.render('dashboard', {
@@ -231,7 +230,7 @@ router.get('/post/:id', async function (req, res) {
 
 
 
-
+//Renders portfolio
 router.get('/portfolio/:id', async function (req, res) {
 	try {
 		const data = await User.findByPk(req.params.id, {
@@ -266,7 +265,7 @@ router.get('/portfolio/:id', async function (req, res) {
 
 
 
-
+//Renders following page
 router.get('/following/:id', async function (req, res) {
 
 	try {
@@ -345,7 +344,7 @@ router.get('/following/:id', async function (req, res) {
 	}
 })
 
-
+//Renders followers page
 router.get('/followers/:id', async function (req, res) {
 	try {
 		const response = await FollowData.findByPk(req.params.id);
@@ -416,6 +415,72 @@ router.get('/followers/:id', async function (req, res) {
 			})
 
 		}
+	} catch (err) {
+		res.render('error')
+	}
+})
+
+
+
+//gets like data by ID
+router.get('/likes/:id', async function (req, res) {
+	try {
+		const response = await Post.findByPk(req.params.id);
+
+		const postData = response.get({
+			plain: true
+		})
+
+		let likes = new Array;
+
+
+		if (postData.likes == null) {
+			likes = null;
+		}
+
+		if (likes != null) {
+			likes = postData.likes.split(',');
+		}
+
+		console.log(likes)
+
+		let userData = new Array
+		if (likes != null) {
+			for(let i = 0; i < likes.length; i++) {
+				likes[i] = Number(likes[i])
+			}
+
+			for (let i = 0; i < likes.length; i++) {
+				const response = await User.findByPk(likes[i], {
+					attributes: {
+						exclude: ['password']
+					},
+				})
+				const data = await response.get({
+					plain: true
+				})
+				userData[userData.length] = data;
+			}
+
+			console.log(userData)
+
+			res.render('likes', {
+				currPost: req.params.id,
+				logUser: req.session.user_id,
+				users: userData,
+				logged_in: req.session.logged_in,
+			})
+		}
+
+		if (likes == null) {
+			res.render('likes', {
+				currPost: req.params.id,
+				logUser: req.session.user_id,
+				users: userData,
+				logged_in: req.session.logged_in,
+			})
+		}
+
 	} catch (err) {
 		res.render('error')
 	}

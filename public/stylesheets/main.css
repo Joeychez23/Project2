@@ -16,6 +16,7 @@ button:hover {
 }
 
 .userLink:hover {
+    cursor: pointer;
     transition: .20s ease-in;
     text-decoration: underline;
     color: blue;
@@ -30,12 +31,14 @@ button:hover {
 }
 
 .userLink2:hover {
+    cursor: pointer;
     transition: .1s ease-in;
     text-decoration: none;
     color: yellow;
 }
 
 .userLink3 {
+    cursor: pointer;
     transition: .20s ease-out;
     text-decoration: underline;
     font-style: italic;
@@ -295,6 +298,16 @@ button:hover {
 
 /* post.handlebars*/
 
+
+#likes {
+    position: relative;
+    right: 12px;
+}
+
+#likeBtnBox {
+    margin-top: 10px;
+}
+
 #commentBox {
     margin: 0px 10px;
 }
@@ -306,10 +319,7 @@ button:hover {
 #postBtnBox {
     margin-top: 5px;
     width: 100%;
-    height: 30px;;
-    /*
-    display: flex;
-    justify-content: space-between;*/
+    height: 30px;
 }
 
 #portTitle {
@@ -420,6 +430,13 @@ button:hover {
 
 #setBtn {
     margin-top: 10px;
+}
+
+
+/* likes */
+
+#likeTitle {
+    margin-bottom: 20px;;
 }
 
 

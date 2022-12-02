@@ -60,9 +60,6 @@ router.post('/login', async function (req, res) {
             return
         }
 
-        //The server started a session for the users current browsing window when they started the site
-        //This function saves the user id index into that session if logged in successfully
-        //This allows the user to close the tab and open it back up and remain logged in
         await req.session.save(function () {
             req.session.user_id = data.id;
             req.session.logged_in = true;
@@ -94,7 +91,7 @@ router.post('/logout', async function (req, res) {
 
 
 
-
+//Gets all user data but with no email or password and at random
 router.get('/', async function (req, res) {
     try {
         const data = await User.findAll({
@@ -112,6 +109,7 @@ router.get('/', async function (req, res) {
 })
 
 
+//Gets all Emails but with out indexes and they're at random
 router.get('/allEmail', withAuth, async function (req, res) {
     try {
         const data = await User.findAll({
@@ -128,6 +126,8 @@ router.get('/allEmail', withAuth, async function (req, res) {
     }
 })
 
+
+//Gets user by ID
 router.get('/getUser/:id', async function (req, res) {
     try {
         const data = await User.findByPk(req.params.id,
@@ -146,6 +146,7 @@ router.get('/getUser/:id', async function (req, res) {
     }
 })
 
+//Gets user Email
 router.get('/getUserEmail/', withAuth, async function (req, res) {
     try {
         const data = await User.findByPk(req.session.user_id, {
@@ -163,6 +164,8 @@ router.get('/getUserEmail/', withAuth, async function (req, res) {
     }
 })
 
+
+//Gets follow data by ID
 router.get('/getFollowData/:id', async function (req, res) {
     try {
         const data = await FollowData.findByPk(req.params.id)
@@ -175,7 +178,7 @@ router.get('/getFollowData/:id', async function (req, res) {
 
 
 
-
+//Update the user follower data
 router.post('/updateUser/:id', withAuth, async function(req, res) {
     try {
         const data = await FollowData.findByPk(req.params.id);
@@ -193,6 +196,8 @@ router.post('/updateUser/:id', withAuth, async function(req, res) {
 });
 
 
+
+//Updates user settings
 router.post('/settingUpdate', withAuth, async function(req, res) {
     const data = await User.findByPk(req.session.user_id)
 

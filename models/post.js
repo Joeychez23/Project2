@@ -22,6 +22,9 @@ Post.init(
         base64: { 
             type: DataTypes.TEXT('long'),
         },
+        likes: {
+            type: DataTypes.STRING
+        },
         user_id: {
             type: DataTypes.INTEGER,
             references: {

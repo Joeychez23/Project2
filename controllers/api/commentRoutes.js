@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 
 
 
-
+//Gets comments by ID
 router.get('/getComment/:id', withAuth, async function(req, res) {
     try {
         console.log(req.params.id);
@@ -47,7 +47,7 @@ router.post('/', withAuth, async function(req, res) {
 
 
 
-
+//Updates Comment
 router.post('/:id', withAuth, async function(req, res) {
     try {
         const data = await Comment.findByPk(req.params.id);

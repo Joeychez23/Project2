@@ -19,7 +19,15 @@
     <button class="btn disabled" id="forwardBtn">Next Post</button>
 </div>
 
+<div class="centerContent">
+    <div class="hide" id="likes">Likes: </div>
+</div>
 {{#if logged_in }}
+<div id="likeBtnBox" class="centerContent" logID="{{logUser}}">
+    <button class="btn btn-primary" id="likeBtn" value="0">Like</button>
+</div>
+
+
 <div id="commentBox">
     <div id="comments" class="defaultClass">
         <form postId={{id}}>

@@ -1,0 +1,22 @@
+<div class="row centerContent" id="likeTitle">
+    <div class="centerContent">
+        <h2>Current likes: </h2>
+    </div>
+    <div class="centerContent">
+        <!--href="/portfolio/{{currId}}"-->
+        <h6><a onclick="history.back()" class="userLink">Return to Previous Page</a></h6>
+    </div>
+</div>
+{{#each users as |user|}}
+<div class="row defaultRowClass">
+    <div class="container-fluid postPreview">
+        <div class="row">
+            <div class="col-md-12">
+                <h6><a class="userLink" href="/portfolio/{{id}}">{{user.username}}</a></h6å>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{{/each}}
