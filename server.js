@@ -35,8 +35,8 @@ app.use(session(sess));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({ extended: true, limit: '50mb'}));
+app.use(express.json({limit: '100mb'}));
+app.use(express.urlencoded({ extended: true, limit: '100mb'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
